@@ -22,7 +22,7 @@ const App: React.FC = () => {
   return (
     <>
       <div className='flex justify-center'>
-        <div className='flex h-screen w-11/12 flex-col items-center rounded-3xl border-[1px] border-white bg-white bg-opacity-25 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
+        <div className='flex h-full w-11/12 flex-col items-center rounded-3xl border-[1px] border-white bg-white bg-opacity-25 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
           <span className='flex w-11/12 flex-col lg:w-10/12'>
             <Summary />
             <HistoryList data={histories} />
