@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchIcon from '../../assets/Search.svg'
 import DeleteIcon from '../../assets/Delete.svg'
+import Button from '../Button'
 
 type History = {
   location: string
@@ -31,13 +32,13 @@ const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
                   <p className='text-sm'>{history.date}</p>
                 </span>
                 <span className='flex h-full w-1/5 items-center justify-end md:items-center'>
-                  <img
-                    src={SearchIcon}
-                    alt={`Search icon for history item ${index}`}
+                  <Button
+                    imgSrc={SearchIcon}
+                    altText={`search-button-${index}`}
                   />
-                  <img
-                    src={DeleteIcon}
-                    alt={`Delete icon for history item ${index}`}
+                  <Button
+                    imgSrc={DeleteIcon}
+                    altText={`delete-button-${index}`}
                   />
                 </span>
               </div>
