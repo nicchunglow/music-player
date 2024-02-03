@@ -1,32 +1,39 @@
-# React + TypeScript + Vite
+# Today's Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of contents
 
-Currently, two official plugins are available:
+- [Introduction](#Introduction)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Requirements](#Requirements)
 
-## Expanding the ESLint configuration
+- [Technologies](#Technologies)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Setup](#Setup)
 
-- Configure the top-level `parserOptions` property like this:
+- [Environment Variables](#Environment-Variables)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- [Available Scripts](#Available-Scripts)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [Improvements](#Improvements)
 
-# survey-sg
+## Introduction
+You need to use React to complete the following tasks. If you are unsure about the question, feel free to make all the necessary UI behavior assumptions and state them in a separate document.
+
+Your answer will be evaluated based on:
+
+* Feature completeness
+* Code readability (naming convention, comments, etc)
+* Web Standards compliance
+* Code reusability and extendibility
+* Compatible with different display resolution of clients
+* Appropriate user interface style and experience
+
+##Requirements
+
+1. Display information at least based on mock up UI.
+
+2. User can input city and country name to get weather information and display them on UI. Please use AJAX to get weather information from OpenWeatherAPI(https://openweathermap.org/api).
+
+3. User can find their records in search history, and can click search button to call api again. Can click delete button to remove the record.
+
+4. If user inputs invalid city or country name, show appropriate message on UI.
