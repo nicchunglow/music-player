@@ -28,7 +28,7 @@ const App: React.FC = () => {
                   </div>
                   <p
                     aria-label='location'
-                    className='text-grey text-sm font-bold'
+                    className='text-sm font-bold text-grey'
                   >
                     Johor,MY
                   </p>
@@ -37,14 +37,14 @@ const App: React.FC = () => {
               <span className='flex w-full flex-col items-end justify-end md:flex-row-reverse md:justify-between'>
                 <p
                   aria-label='weather-description'
-                  className='text-grey text-sm'
+                  className='text-sm text-grey'
                 >
                   Clouds
                 </p>
-                <p aria-label='humidity' className='text-grey text-sm'>
+                <p aria-label='humidity' className='text-sm text-grey'>
                   Humidity : 58%
                 </p>
-                <p aria-label='date' className='text-grey text-sm'>
+                <p aria-label='date' className='text-sm text-grey'>
                   01-09-2022 09:41am
                 </p>
               </span>
