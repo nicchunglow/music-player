@@ -3,7 +3,7 @@ import React from 'react'
 const Summary: React.FC = () => {
   return (
     <>
-      <div aria-label='summary' className='p-5'>
+      <div aria-label='summary' className='w-full py-5'>
         <h1 aria-label='title' className='text-lg'>
           Today's Weather
         </h1>
