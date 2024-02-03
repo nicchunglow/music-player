@@ -12,9 +12,7 @@ describe('Summary', () => {
     expect(Title).toBeInTheDocument()
   })
   it('renders Temp', () => {
-    const Temperature = screen.getByRole('heading', {
-      name: 'temperature',
-    })
+    const Temperature = screen.getByLabelText('temperature')
     const HighestTemp = screen.getByLabelText('highest-temp')
     const LowestTemp = screen.getByLabelText('lowest-temp')
     expect(Temperature).toBeInTheDocument()

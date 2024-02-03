@@ -9,12 +9,12 @@ const Summary: React.FC = () => {
         </h1>
         <span className='flex flex-row'>
           <span>
-            <h2
+            <p
               aria-label='temperature'
               className='text-5xl font-bold text-primaryAccent'
             >
               26°
-            </h2>
+            </p>
             <span className='flex flex-col'>
               <div className='flex'>
                 <p aria-label='highest-temp' className=' text-sm'>
