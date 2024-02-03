@@ -25,7 +25,7 @@ const App: React.FC = () => {
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
-        <span className=' flex h-60 w-11/12 items-start justify-between pt-5 md:h-48 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
+        <span className=' flex h-40 w-11/12 items-start justify-between pt-5 md:h-48 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
           <input
             type='text'
             className='mr-5 flex h-[60px] w-11/12 rounded-3xl bg-white bg-opacity-20 px-4'
@@ -39,7 +39,7 @@ const App: React.FC = () => {
           width={'300px'}
           height={'300px'}
           src={Sun}
-          className='absolute right-[3%] top-20 z-10 w-5/12 min-[450px]:w-[160px] md:w-[300px] lg:right-[30%]'
+          className='absolute right-[3%] top-20 z-10 w-[180px] sm:w-[200px] md:w-[300px] lg:right-[28%]'
           alt='Sun'
         />
         <div className='z-0 flex h-full w-11/12 flex-col items-center rounded-3xl border-[1px] border-white border-opacity-50 bg-white bg-opacity-25 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
