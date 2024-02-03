@@ -1,2 +1,2 @@
 npm test
-npx prettier .
+npm run lint
