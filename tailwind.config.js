@@ -6,7 +6,7 @@ export default {
     extend: {},
     colors: {
       white: '#ffffff',
-      primaryAccent: '#716EFA',
+      primaryAccent: '#6C40B5',
     },
   },
   plugins: [],
