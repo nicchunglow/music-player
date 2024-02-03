@@ -17,16 +17,17 @@
 - [Improvements](#Improvements)
 
 ## Introduction
+
 You need to use React to complete the following tasks. If you are unsure about the question, feel free to make all the necessary UI behavior assumptions and state them in a separate document.
 
 Your answer will be evaluated based on:
 
-* Feature completeness
-* Code readability (naming convention, comments, etc)
-* Web Standards compliance
-* Code reusability and extendibility
-* Compatible with different display resolution of clients
-* Appropriate user interface style and experience
+- Feature completeness
+- Code readability (naming convention, comments, etc)
+- Web Standards compliance
+- Code reusability and extendibility
+- Compatible with different display resolution of clients
+- Appropriate user interface style and experience
 
 ##Requirements
 
