@@ -4,15 +4,15 @@
 
 - [Introduction](#Introduction)
 
-- [Assumptions/Actions Taken](#Assumptions/ActionsTaken)
-
-- [Technologies](#Technologies)
+- [Assumptions/Actions Taken](#Assumptions/Actions-Taken)
 
 - [Setup](#Setup)
 
 - [Environment Variables](#Environment-Variables)
 
 - [Available Scripts](#Available-Scripts)
+
+- [Technologies](#Technologies)
 
 - [Improvements](#Improvements)
 
