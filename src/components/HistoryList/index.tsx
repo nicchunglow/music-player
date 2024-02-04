@@ -2,6 +2,7 @@ import React from 'react'
 import SearchIcon from '../../assets/Search.svg'
 import DeleteIcon from '../../assets/Delete.svg'
 import Button from '../Button'
+import { formatUnixTimestampToDate } from '../../shared/helper'
 
 type History = {
   name: string
@@ -41,7 +42,9 @@ const HistoryList: React.FC<HistoryListProps> = ({
                   <p className='text-sm'>
                     {history.name},{history.country}
                   </p>
-                  <p className='text-sm'>{history.dt}</p>
+                  <p className='text-sm'>
+                    {history?.dt && formatUnixTimestampToDate(history.dt)}
+                  </p>
                 </span>
                 <span className='flex h-full w-1/5 items-center justify-end md:items-center'>
                   <Button

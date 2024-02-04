@@ -5,17 +5,17 @@ const mockHistory = [
   {
     name: 'Johor',
     country: 'MY',
-    dt: '01-09-2022 09:41am',
+    dt: '1707031344',
   },
   {
     name: 'Osaka',
     country: 'JP',
-    dt: '01-09-2022 09:41am',
+    dt: '1707031344',
   },
   {
     name: 'Taiwan',
     country: 'TW',
-    dt: '01-09-2022 09:41am',
+    dt: '1707031344',
   },
 ]
 
@@ -44,6 +44,7 @@ describe('HistoryList', () => {
 
     const FirstHistoryItem = screen.getByLabelText('history-item-0')
     expect(FirstHistoryItem).toBeInTheDocument()
+    expect(FirstHistoryItem).toHaveTextContent('Johor,MY02/04/2024 03:22 PM')
 
     fireEvent.click(screen.getByAltText('search-button-0'))
     expect(onSelectMock).toHaveBeenCalledWith(0)
