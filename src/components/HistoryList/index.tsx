@@ -15,10 +15,6 @@ interface HistoryListProps {
 }
 
 const HistoryList: React.FC<HistoryListProps> = ({ data, selected }) => {
-  const handleSelected = (index) => {
-    const name = data[index].name
-    selected(name)
-  }
   return (
     <div
       aria-label='history-list'
@@ -47,7 +43,7 @@ const HistoryList: React.FC<HistoryListProps> = ({ data, selected }) => {
                     imgSrc={SearchIcon}
                     altText={`search-button-${index}`}
                     onClick={() => {
-                      handleSelected(index)
+                      selected(index)
                     }}
                   />
                   <Button
