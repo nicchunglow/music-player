@@ -4,9 +4,13 @@ import Button from '../Button'
 
 type SearchProps = {
   placeholder: string
+  onChange: (value: string) => void
 }
 
-const Search: React.FC<SearchProps> = ({ placeholder }) => {
+const Search: React.FC<SearchProps> = ({ placeholder, onChange }) => {
+  const setOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value)
+  }
   return (
     <>
       <span className=' flex h-40 w-11/12 items-start justify-between pt-5 md:h-48 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
@@ -17,6 +21,7 @@ const Search: React.FC<SearchProps> = ({ placeholder }) => {
           id='search-input'
           name='search-input'
           placeholder={placeholder}
+          onChange={setOnChange}
         />
         <Button imgSrc={PurpleSearch} altText='country-search-button' />
       </span>

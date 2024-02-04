@@ -1,4 +1,4 @@
-import App from './App'
+import App from '.'
 import { render, screen } from '@testing-library/react'
 
 describe('App', () => {

@@ -5,6 +5,7 @@ describe('Search', () => {
   it('renders', () => {
     const props = {
       placeholder: 'Country',
+      onChange: jest.mock,
     }
     render(<Search {...props} />)
     const SearchInput = screen.getByRole('textbox', {

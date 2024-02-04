@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useEffect, useState } from 'react'
-import Summary from './components/Summary'
-import { mockHistory } from './constants/mockData'
-import HistoryList from './components/HistoryList'
-import Sun from './assets/sun.png'
-import Search from './components/Search'
+import Summary from '../components/Summary'
+import { mockHistory } from '../constants/mockData'
+import HistoryList from '../components/HistoryList'
+import Sun from '../assets/sun.png'
+import Search from '../components/Search'
+import { getLocationWeather } from './App.service'
 
 type History = {
   location: string
@@ -12,19 +15,27 @@ type History = {
 
 const App: React.FC = () => {
   const [histories, setHistories] = useState<History[]>([])
+  const [weather, setWeather] = useState<any>({})
+  const [search, setSearch] = useState('')
 
   const getHistories = async () => {
     setHistories(mockHistory)
   }
 
   useEffect(() => {
+    const getWeather = async (location: string) => {
+      const res = await getLocationWeather(location)
+      setWeather(res)
+      console.log('weather', weather)
+    }
     getHistories()
-  }, [])
+    search && getWeather(search)
+  }, [search, weather])
 
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
-        <Search placeholder='Country' />
+        <Search placeholder='Country' onChange={setSearch} />
         <img
           width={'300px'}
           height={'300px'}
