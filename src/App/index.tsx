@@ -3,7 +3,11 @@ import Summary from '../components/Summary'
 import HistoryList from '../components/HistoryList'
 import Sun from '../assets/sun.png'
 import Search from '../components/Search'
-import { getLocationWeather } from './App.service'
+import {
+  getLocalStorageHistories,
+  getLocationWeather,
+  saveToLocalStorage,
+} from './App.service'
 import { WeatherData } from './App.types'
 
 type History = {
@@ -43,7 +47,11 @@ const App: React.FC = () => {
         country: res.country,
         dt: res.dt,
       }
-      setHistories((prevHistories) => [historyData, ...prevHistories])
+      setHistories((prevHistories) => {
+        const newArr = [historyData, ...prevHistories]
+        saveToLocalStorage(newArr)
+        return newArr
+      })
     }
 
     if (search) {
@@ -52,6 +60,10 @@ const App: React.FC = () => {
     // No need for eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, setHistories])
 
+  useEffect(() => {
+    const localStorageHistories = getLocalStorageHistories()
+    setHistories(localStorageHistories)
+  }, [])
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
