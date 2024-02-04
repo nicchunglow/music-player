@@ -1,4 +1,4 @@
-import { customAxios } from '../helper/api'
+import { customAxios } from '../services/api'
 
 export const getLocationWeather = async (location: string) => {
   const apiKey = process.env.API_KEY
