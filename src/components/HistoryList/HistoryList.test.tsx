@@ -45,11 +45,9 @@ describe('HistoryList', () => {
     const FirstHistoryItem = screen.getByLabelText('history-item-0')
     expect(FirstHistoryItem).toBeInTheDocument()
 
-    // Test selection
     fireEvent.click(screen.getByAltText('search-button-0'))
     expect(onSelectMock).toHaveBeenCalledWith(0)
 
-    // Test deletion
     fireEvent.click(screen.getByAltText('delete-button-0'))
     expect(onDeleteMock).toHaveBeenCalledWith(0)
   })
@@ -72,11 +70,9 @@ describe('HistoryList', () => {
       />
     )
 
-    // Test selection
     fireEvent.click(screen.getByAltText('search-button-1'))
     expect(onSelectMock).toHaveBeenCalledWith(1)
 
-    // Test deletion
     fireEvent.click(screen.getByAltText('delete-button-2'))
     expect(onDeleteMock).toHaveBeenCalledWith(2)
   })
