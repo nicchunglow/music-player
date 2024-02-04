@@ -26,6 +26,6 @@ describe('App Service', () => {
 
     await expect(async () => {
       await getLocationWeather('singapore')
-    }).rejects.toThrow('City not found. Please try another input.')
+    }).rejects.toThrow('Country or City not found. Please try another input.')
   })
 })
