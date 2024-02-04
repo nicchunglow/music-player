@@ -10,6 +10,7 @@ import {
   saveToLocalStorage,
 } from '../services/localStorage'
 import Loader from '../components/Loader'
+import NotFoundBar from '../components/NotFoundBar'
 
 const defaultWeatherData: WeatherData = {
   country: '',
@@ -34,10 +35,12 @@ const App: React.FC = () => {
   const [search, setSearch] = useState('')
   const [selectedHistory, setSelectedHistory] = useState<string>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string>('')
 
   const getWeather = async (location: string) => {
     try {
       setIsLoading(true)
+      setErrorMsg('')
       const res: any = await getLocationWeather(location)
       setWeather(res)
       const historyData = {
@@ -52,10 +55,10 @@ const App: React.FC = () => {
         saveToLocalStorage(newArr)
         return newArr
       })
-      setIsLoading(false)
     } catch (err: any) {
-      alert(err.message)
+      setErrorMsg(err.message)
     }
+    setIsLoading(false)
   }
 
   const handleSelectHistory = (index) => {
@@ -85,6 +88,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (selectedHistory) {
+      setSearch('')
       getWeather(selectedHistory)
     }
   }, [selectedHistory])
@@ -93,6 +97,7 @@ const App: React.FC = () => {
     <>
       {isLoading && <Loader />}
       <div className='flex flex-col items-center justify-center'>
+        {errorMsg && <NotFoundBar errorMsg={errorMsg} />}
         <Search placeholder='Country' onChange={setSearch} />
         <img
           width={'300px'}
