@@ -17,13 +17,12 @@ const Search: React.FC<SearchProps> = ({ placeholder, onChange }) => {
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       onChange(searchTerm)
-    }, 500)
+    }, 5000)
 
     return () => {
       clearTimeout(debounceTimer)
     }
   }, [searchTerm, onChange])
-
   return (
     <>
       <span className='flex h-40 w-11/12 items-start justify-between pt-5 md:h-48 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
@@ -36,7 +35,11 @@ const Search: React.FC<SearchProps> = ({ placeholder, onChange }) => {
           placeholder={placeholder}
           onChange={setOnChange}
         />
-        <Button imgSrc={PurpleSearch} altText='country-search-button' />
+        <Button
+          onClick={() => onChange(searchTerm)}
+          imgSrc={PurpleSearch}
+          altText='country-search-button'
+        />
       </span>
     </>
   )

@@ -58,7 +58,6 @@ const App: React.FC = () => {
 
   const handleSelectHistory = (index) => {
     const name = histories[index].name
-    console.log(name)
     setSelectedHistory(name)
   }
   const handleDeleteHistory = (index) => {
