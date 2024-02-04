@@ -30,23 +30,25 @@
 
 1. The figma UI does not have more than 1 search bar as compared to the Task mock up. I decided to follow the figma mock up instead. In this Application, Country or city is usable because of the "Call current weather data" by "OpenWeatherApp". Working example will be typing “Singapore”,“Indonesia” (Country) or “Osaka”, “New York” (City).
 
-2. Only Light theme is used for this project.
+2. As mentioned, the working requirement is also to click the history of the location to find out what is Today’s weather of the location, and not click to retrieve the weather of that date.
 
-3. Error Message box is placed above the search box instead because the message will clash with the image icon.
+3. Only Light theme is used for this project.
 
-4. This App is built with responsive design, suitable for all screen sizes till Laptop size at 1440 x1340. Best viewed in either Mobile M 375 X 737 or Laptop size 1440 x1340.
+4. Error Message box is placed above the search box instead because the message will clash with the image icon.
 
-5. This codebase is written with tests. The test coverage right now is at 78.22.
+5. This App is built with responsive design, suitable for all screen sizes till Laptop size at 1440 x1340. Best viewed in either Mobile M 375 X 737 or Laptop size 1440 x1340.
 
-6. Based on my understanding of React, I decided to continue this assignment on React with Vite.
+6. This codebase is written with tests. The test coverage right now is at 78.22.
 
-7. Axios is used for AJAX calls.
+7. Based on my understanding of React, I decided to continue this assignment on React with Vite.
 
-8. I added debounce for the typing on the search input, which will call the api after 5 seconds. The working assumption is that the user may not go ahead with clicking the button after typing.
+8. Axios is used for AJAX calls.
 
 9. For saving history, as there was no backend to save the data, I made it to save in the localStorage instead. This can allow the users to save and come back to the web-app again. The user can remove all their data by clearing cache.
 
 10. For my code structure, I only have App and Components.The “App” folder currently serves as the “pages” folder. If there are more pages, this will naturally go into "pages".
+
+11. The App will not search the same country or city name if you have already searched the same name. E.g, if you click for “Singapore” in the history, you cannot click another older entry of “Singapore” weather to search for the current weather.
 
 ## Setup
 
