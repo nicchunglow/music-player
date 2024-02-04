@@ -4,8 +4,9 @@ import DeleteIcon from '../../assets/Delete.svg'
 import Button from '../Button'
 
 type History = {
-  location: string
-  date: string
+  name: string
+  country: string
+  dt: string
 }
 
 interface HistoryListProps {
@@ -31,8 +32,10 @@ const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
                 className='my-4 flex h-16 items-start justify-around rounded-2xl bg-white bg-opacity-40 px-2 md:flex-row md:justify-between'
               >
                 <span className='flex h-full w-full flex-col justify-center pr-5 md:w-full md:flex-row md:items-center md:justify-between'>
-                  <p className='text-sm'>{history.location}</p>
-                  <p className='text-sm'>{history.date}</p>
+                  <p className='text-sm'>
+                    {history.name},{history.country}
+                  </p>
+                  <p className='text-sm'>{history.dt}</p>
                 </span>
                 <span className='flex h-full w-1/5 items-center justify-end md:items-center'>
                   <Button

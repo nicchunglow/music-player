@@ -1,21 +1,25 @@
 import HistoryList from './index'
 import { render, screen } from '@testing-library/react'
 
+export const mockHistory = [
+  {
+    name: 'Johor',
+    country: 'MY',
+    dt: '01-09-2022 09:41am',
+  },
+  {
+    name: 'Osaka',
+    country: 'JP',
+    dt: '01-09-2022 09:41am',
+  },
+  {
+    name: 'Taiwan',
+    country: 'TW',
+    dt: '01-09-2022 09:41am',
+  },
+]
+
 describe('HistoryList', () => {
-  const mockHistory = [
-    {
-      location: 'Johor,MY',
-      date: '01-09-2022 09:41am',
-    },
-    {
-      location: 'Osaka,JP',
-      date: '01-09-2022 09:41am',
-    },
-    {
-      location: 'Taipei,TW',
-      date: '01-09-2022 09:41am',
-    },
-  ]
   it('renders Search History Title', () => {
     render(<HistoryList data={mockHistory} />)
     const HistoryTitle = screen.getByRole('heading', {

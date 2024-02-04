@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Summary from '../components/Summary'
-import { mockHistory } from '../constants/mockData'
 import HistoryList from '../components/HistoryList'
 import Sun from '../assets/sun.png'
 import Search from '../components/Search'
@@ -8,8 +7,9 @@ import { getLocationWeather } from './App.service'
 import { WeatherData } from './App.types'
 
 type History = {
-  location: string
-  date: string
+  name: string
+  country: string
+  dt: string
 }
 
 const defaultWeatherData: WeatherData = {
@@ -34,23 +34,23 @@ const App: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData>(defaultWeatherData)
   const [search, setSearch] = useState('')
 
-  const getHistories = async () => {
-    setHistories(mockHistory)
-  }
-
   useEffect(() => {
     const getWeather = async (location: string) => {
       const res: any = await getLocationWeather(location)
       setWeather(res)
+      const historyData = {
+        name: res.name,
+        country: res.country,
+        dt: res.dt,
+      }
+      setHistories((prevHistories) => [...prevHistories, historyData])
     }
-
-    getHistories()
 
     if (search) {
       getWeather(search)
     }
     // No need for eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search])
+  }, [search, setHistories])
 
   return (
     <>
