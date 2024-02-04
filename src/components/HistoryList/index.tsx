@@ -23,7 +23,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
   return (
     <div
       aria-label='history-list'
-      className='flex h-screen w-full flex-col items-center rounded-3xl bg-white bg-opacity-20'
+      className='flex h-screen w-full flex-col items-center overflow-scroll rounded-t-3xl bg-white bg-opacity-20'
     >
       <div className='w-11/12'>
         <h2 aria-label='history-title' className='flex py-5 text-sm'>
