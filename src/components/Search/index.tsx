@@ -1,0 +1,27 @@
+import React from 'react'
+import PurpleSearch from '../../assets/PurpleSearch.svg'
+import Button from '../Button'
+
+type SearchProps = {
+  placeholder: string
+}
+
+const Search: React.FC<SearchProps> = ({ placeholder }) => {
+  return (
+    <>
+      <span className=' flex h-40 w-11/12 items-start justify-between pt-5 md:h-48 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
+        <input
+          type='text'
+          aria-label='search-input'
+          className='mr-5 flex h-[60px] w-9/12 rounded-3xl bg-white bg-opacity-20 px-4 sm:w-11/12'
+          id='search-input'
+          name='search-input'
+          placeholder={placeholder}
+        />
+        <Button imgSrc={PurpleSearch} altText='country-search-button' />
+      </span>
+    </>
+  )
+}
+
+export default Search

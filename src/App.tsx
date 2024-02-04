@@ -24,7 +24,7 @@ const App: React.FC = () => {
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
-        <Search />
+        <Search placeholder='Country' />
         <img
           width={'300px'}
           height={'300px'}
