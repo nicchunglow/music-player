@@ -28,7 +28,7 @@
 
 ## Assumptions/Actions Taken
 
-1. Because the figma UI does not have more than 1 search bar as compared to the Task mock up, I decided to follow the figma mock up instead.In this Application, Country or city is usable because of the "Call current weather data" by "OpenWeatherApp". The api used in this application is https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}.
+1. The figma UI does not have more than 1 search bar as compared to the Task mock up. I decided to follow the figma mock up instead. In this Application, Country or city is usable because of the "Call current weather data" by "OpenWeatherApp". Working example will be typing “Singapore”,“Indonesia” (Country) or “Osaka”, “New York” (City).
 
 2. Only Light theme is used for this project.
 
@@ -42,9 +42,11 @@
 
 7. Axios is used for AJAX calls.
 
-8. For saving history, as there was no backend to save the data, I made it to save in the localStorage instead. This can allow the users to save and come back to the web-app again. The user can remove all their data by clearing cache.
+8. I added debounce for the typing on the search input, which will call the api after 5 seconds. The working assumption is that the user may not go ahead with clicking the button after typing.
 
-9. For my code structure, I only have App and Components. As I do not foresee additional pages for this assignment, "App" folder is used to contain the page. If there are more pages, this will naturally go into "pages".
+9. For saving history, as there was no backend to save the data, I made it to save in the localStorage instead. This can allow the users to save and come back to the web-app again. The user can remove all their data by clearing cache.
+
+10. For my code structure, I only have App and Components.The “App” folder currently serves as the “pages” folder. If there are more pages, this will naturally go into "pages".
 
 ## Setup
 
@@ -82,6 +84,7 @@ $ npm run dev
 ## Technologies
 
 dependencies:
+
 ```
 - "axios": "^1.6.7",
 - "react": "^18.2.0",
@@ -91,6 +94,7 @@ dependencies:
 - "tailwindcss": "^3.4.1"
 - "vite": "^5.0.12"
 ```
+
 ## Environment Variables
 
 ```
