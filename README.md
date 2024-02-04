@@ -8,11 +8,11 @@
 
 - [Setup](#Setup)
 
-- [Environment Variables](#Environment-Variables)
-
 - [Available Scripts](#Available-Scripts)
 
 - [Technologies](#Technologies)
+
+- [Environment Variables](#Environment-Variables)
 
 - [Improvements](#Improvements)
 
@@ -91,11 +91,12 @@ dependencies:
 - "tailwindcss": "^3.4.1"
 - "vite": "^5.0.12"
 
-##Environment Variables
+## Environment Variables
+
 BASE_URL= <-(Use OpenWeatherApi)
 API_KEY= <-(For OpenWeatherApi)
 
-##Improvements
+## Improvements
 
 1. Cover the code better with test. I have issues with axios-mock-adapter. Suspect something to do with React with Vite implementation. So have to handle the config and environment aspect of mocking.
 
