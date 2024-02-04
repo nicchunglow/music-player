@@ -26,11 +26,12 @@ const App: React.FC = () => {
     const getWeather = async (location: string) => {
       const res = await getLocationWeather(location)
       setWeather(res)
-      console.log('weather', weather)
+      console.log(weather)
     }
     getHistories()
     search && getWeather(search)
-  }, [search, weather])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
 
   return (
     <>
