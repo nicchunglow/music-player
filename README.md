@@ -82,7 +82,7 @@ $ npm run dev
 ## Technologies
 
 dependencies:
-
+```
 - "axios": "^1.6.7",
 - "react": "^18.2.0",
 - "react-dom": "^18.2.0",
@@ -90,7 +90,7 @@ dependencies:
 - "ts-node": "^10.9.2",
 - "tailwindcss": "^3.4.1"
 - "vite": "^5.0.12"
-
+```
 ## Environment Variables
 
 ```
@@ -102,4 +102,4 @@ API_KEY= <-(For OpenWeatherApi)
 
 1. Cover the code better with test. I have issues with axios-mock-adapter. Suspect something to do with React with Vite implementation. So have to handle the config and environment aspect of mocking.
 
-2.Implement theming.
+2. Implement theming.
