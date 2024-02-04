@@ -100,8 +100,8 @@ const App: React.FC = () => {
         {errorMsg && <NotFoundBar errorMsg={errorMsg} />}
         <Search placeholder='Country' onChange={setSearch} />
         <img
-          width={'300px'}
-          height={'300px'}
+          width={'600px'}
+          height={'600px'}
           src={Sun}
           className='xm:w-52 absolute right-4 top-20 z-10 w-40 sm:right-28 md:right-32 md:w-72 lg:right-64 lg:w-72 xl:right-[420px] xl:top-16'
           alt='Sun'
