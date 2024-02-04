@@ -3,12 +3,12 @@ import Summary from '../components/Summary'
 import HistoryList from '../components/HistoryList'
 import Sun from '../assets/sun.png'
 import Search from '../components/Search'
+import { getLocationWeather } from './App.service'
+import { WeatherData } from './App.types'
 import {
   getLocalStorageHistories,
-  getLocationWeather,
   saveToLocalStorage,
-} from './App.service'
-import { WeatherData } from './App.types'
+} from '../services/localStorage'
 
 type History = {
   name: string
@@ -37,33 +37,43 @@ const App: React.FC = () => {
   const [histories, setHistories] = useState<History[]>([])
   const [weather, setWeather] = useState<WeatherData>(defaultWeatherData)
   const [search, setSearch] = useState('')
+  const [selectedHistory, setSelectedHistory] = useState<string>()
+
+  const getWeather = async (location: string) => {
+    const res: any = await getLocationWeather(location)
+    setWeather(res)
+    const historyData = {
+      name: res.name,
+      country: res.country,
+      dt: res.dt,
+    }
+    setHistories((prevHistories) => {
+      const newArr = prevHistories
+        ? [historyData, ...prevHistories]
+        : [historyData]
+      saveToLocalStorage(newArr)
+      return newArr
+    })
+  }
 
   useEffect(() => {
-    const getWeather = async (location: string) => {
-      const res: any = await getLocationWeather(location)
-      setWeather(res)
-      const historyData = {
-        name: res.name,
-        country: res.country,
-        dt: res.dt,
-      }
-      setHistories((prevHistories) => {
-        const newArr = [historyData, ...prevHistories]
-        saveToLocalStorage(newArr)
-        return newArr
-      })
-    }
-
     if (search) {
       getWeather(search)
     }
     // No need for eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, setHistories])
+  }, [search, selectedHistory, setHistories])
 
   useEffect(() => {
     const localStorageHistories = getLocalStorageHistories()
     setHistories(localStorageHistories)
   }, [])
+
+  useEffect(() => {
+    if (selectedHistory) {
+      getWeather(selectedHistory)
+    }
+  }, [selectedHistory])
+
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
@@ -78,7 +88,7 @@ const App: React.FC = () => {
         <div className='z-0 flex h-full w-11/12 flex-col items-center rounded-3xl border-[1px] border-white border-opacity-50 bg-white bg-opacity-25 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
           <span className='z-10 flex w-11/12 flex-col lg:w-10/12'>
             <Summary data={weather} />
-            <HistoryList data={histories} />
+            <HistoryList data={histories} selected={setSelectedHistory} />
           </span>
         </div>
       </div>

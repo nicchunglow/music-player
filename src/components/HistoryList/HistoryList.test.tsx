@@ -21,19 +21,19 @@ export const mockHistory = [
 
 describe('HistoryList', () => {
   it('renders Search History Title', () => {
-    render(<HistoryList data={mockHistory} />)
+    render(<HistoryList data={mockHistory} selected={() => jest.mock} />)
     const HistoryTitle = screen.getByRole('heading', {
       name: 'history-title',
     })
     expect(HistoryTitle).toBeInTheDocument()
   })
   it('renders history items by testing if it has first of the item', () => {
-    render(<HistoryList data={mockHistory} />)
+    render(<HistoryList data={mockHistory} selected={() => jest.mock} />)
     const FirstHistoryItem = screen.getByLabelText('history-item-0')
     expect(FirstHistoryItem).toBeInTheDocument()
   })
   it('renders no history message if there is no data', () => {
-    render(<HistoryList data={[]} />)
+    render(<HistoryList data={[]} selected={() => jest.mock} />)
     const NoHistoryMessage = screen.getByLabelText('no-history-message')
     expect(NoHistoryMessage).toBeInTheDocument()
   })
