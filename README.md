@@ -93,8 +93,10 @@ dependencies:
 
 ## Environment Variables
 
+```
 BASE_URL= <-(Use OpenWeatherApi)
 API_KEY= <-(For OpenWeatherApi)
+```
 
 ## Improvements
 
