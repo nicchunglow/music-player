@@ -11,13 +11,13 @@ export const getLocationWeather = async (location: string) => {
       const processedData = {
         name: name,
         main: main,
-        weather: weather,
+        desc: weather[0].main,
         dt: dt,
         country: sys.country,
       }
       return processedData
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
   } catch (err: any) {
     throw new Error(err.message)
   }
