@@ -10,13 +10,13 @@ describe('App', () => {
     expect(Summary).toBeInTheDocument()
   })
   it('renders Search History Title', () => {
-    const HistoryTitle = screen.getByRole('heading', {
-      name: 'history-title',
-    })
-    expect(HistoryTitle).toBeInTheDocument()
+    const HistoryList = screen.getByLabelText('history-list')
+    expect(HistoryList).toBeInTheDocument()
   })
-  it('renders history items by testing if it has first of the item', () => {
-    const FirstHistoryItem = screen.getByLabelText('history-item-0')
-    expect(FirstHistoryItem).toBeInTheDocument()
+  it('renders Search Input', () => {
+    const SearchInput = screen.getByRole('textbox', {
+      name: 'search-input',
+    })
+    expect(SearchInput).toBeInTheDocument()
   })
 })

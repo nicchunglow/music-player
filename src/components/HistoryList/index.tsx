@@ -14,7 +14,10 @@ interface HistoryListProps {
 
 const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
   return (
-    <div className='flex h-screen w-full flex-col items-center rounded-3xl bg-white bg-opacity-20'>
+    <div
+      aria-label='history-list'
+      className='flex h-screen w-full flex-col items-center rounded-3xl bg-white bg-opacity-20'
+    >
       <div className='w-11/12'>
         <h2 aria-label='history-title' className='flex py-5 text-sm'>
           Search History
