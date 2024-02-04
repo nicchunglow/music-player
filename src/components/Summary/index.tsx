@@ -34,13 +34,13 @@ const Summary: React.FC<SummaryProps> = ({
                 </p>
               </div>
               <p aria-label='location' className='text-sm font-bold text-grey'>
-                {name},{country}
+                {name || '_'},{country || '_'}
               </p>
             </span>
           </span>
           <span className='ml-5 flex w-full flex-col items-end justify-end md:flex-row-reverse md:justify-between'>
             <p aria-label='weather-description' className='text-sm text-grey'>
-              {desc}
+              {desc || '_'}
             </p>
             <p aria-label='humidity' className='text-sm text-grey'>
               Humidity : {main?.humidity || 0}%
