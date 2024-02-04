@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PurpleSearch from '../../assets/PurpleSearch.svg'
 import Button from '../Button'
 
@@ -13,16 +13,6 @@ const Search: React.FC<SearchProps> = ({ placeholder, onChange }) => {
   const setOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
-
-  useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      onChange(searchTerm)
-    }, 5000)
-
-    return () => {
-      clearTimeout(debounceTimer)
-    }
-  }, [searchTerm, onChange])
   return (
     <>
       <span className='flex h-40 w-11/12 items-start justify-between pt-5 md:h-48 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>

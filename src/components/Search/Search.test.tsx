@@ -38,16 +38,4 @@ describe('Search', () => {
 
     expect(props.onChange).toHaveBeenCalledWith('United')
   })
-
-  it('triggers debounce when typing', async () => {
-    const SearchInput = screen.getByRole('textbox', {
-      name: 'search-input',
-    })
-
-    fireEvent.change(SearchInput, { target: { value: 'United' } })
-
-    jest.runAllTimers()
-
-    expect(props.onChange).toHaveBeenCalledWith('United')
-  })
 })
