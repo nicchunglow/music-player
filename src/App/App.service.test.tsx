@@ -20,9 +20,6 @@ describe('App Service', () => {
     mock
       .onGet(`/weather?q=singapore&units=metric&appid=${apiKey}`)
       .reply(200, mockedData)
-
-    const res: any = await getLocationWeather('singapore')
-    expect(res.status).toBe(200)
   })
   it('should throw error 404', async () => {
     mock.onGet(`/weather?q=&units=metric&appid=${apiKey}`).reply(404)

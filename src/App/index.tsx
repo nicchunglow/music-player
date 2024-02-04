@@ -4,17 +4,12 @@ import HistoryList from '../components/HistoryList'
 import Sun from '../assets/sun.png'
 import Search from '../components/Search'
 import { getLocationWeather } from './App.service'
-import { WeatherData } from './App.types'
+import { WeatherData, History } from './App.types'
 import {
   getLocalStorageHistories,
   saveToLocalStorage,
 } from '../services/localStorage'
-
-type History = {
-  name: string
-  country: string
-  dt: string
-}
+import Loader from '../components/Loader'
 
 const defaultWeatherData: WeatherData = {
   country: '',
@@ -38,9 +33,11 @@ const App: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData>(defaultWeatherData)
   const [search, setSearch] = useState('')
   const [selectedHistory, setSelectedHistory] = useState<string>()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const getWeather = async (location: string) => {
     try {
+      setIsLoading(true)
       const res: any = await getLocationWeather(location)
       setWeather(res)
       const historyData = {
@@ -55,6 +52,7 @@ const App: React.FC = () => {
         saveToLocalStorage(newArr)
         return newArr
       })
+      setIsLoading(false)
     } catch (err: any) {
       alert(err.message)
     }
@@ -80,7 +78,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const localStorageHistories = getLocalStorageHistories()
+    setIsLoading(true)
     setHistories(localStorageHistories)
+    setIsLoading(false)
   }, [])
 
   useEffect(() => {
@@ -91,6 +91,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      {isLoading && <Loader />}
       <div className='flex flex-col items-center justify-center'>
         <Search placeholder='Country' onChange={setSearch} />
         <img

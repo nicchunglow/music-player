@@ -16,3 +16,9 @@ export type WeatherData = {
   name: string
   desc: string
 }
+
+export type History = {
+  name: string
+  country: string
+  dt: string
+}
