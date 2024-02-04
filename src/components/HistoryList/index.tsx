@@ -11,10 +11,15 @@ type History = {
 
 interface HistoryListProps {
   data: History[]
-  selected: any
+  onSelect: any
+  onDelete: any
 }
 
-const HistoryList: React.FC<HistoryListProps> = ({ data, selected }) => {
+const HistoryList: React.FC<HistoryListProps> = ({
+  data,
+  onSelect,
+  onDelete,
+}) => {
   return (
     <div
       aria-label='history-list'
@@ -43,12 +48,15 @@ const HistoryList: React.FC<HistoryListProps> = ({ data, selected }) => {
                     imgSrc={SearchIcon}
                     altText={`search-button-${index}`}
                     onClick={() => {
-                      selected(index)
+                      onSelect(index)
                     }}
                   />
                   <Button
                     imgSrc={DeleteIcon}
                     altText={`delete-button-${index}`}
+                    onClick={() => {
+                      onDelete(index)
+                    }}
                   />
                 </span>
               </div>

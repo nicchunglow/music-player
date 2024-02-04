@@ -58,7 +58,14 @@ const App: React.FC = () => {
 
   const handleSelectHistory = (index) => {
     const name = histories[index].name
+    console.log(name)
     setSelectedHistory(name)
+  }
+  const handleDeleteHistory = (index) => {
+    const updatedHistories = [...histories]
+    updatedHistories.splice(index, 1)
+    saveToLocalStorage(updatedHistories)
+    setHistories(updatedHistories)
   }
 
   useEffect(() => {
@@ -93,7 +100,11 @@ const App: React.FC = () => {
         <div className='z-0 flex h-full w-11/12 flex-col items-center rounded-3xl border-[1px] border-white border-opacity-50 bg-white bg-opacity-25 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
           <span className='z-10 flex w-11/12 flex-col lg:w-10/12'>
             <Summary data={weather} />
-            <HistoryList data={histories} selected={handleSelectHistory} />
+            <HistoryList
+              data={histories}
+              onSelect={handleSelectHistory}
+              onDelete={handleDeleteHistory}
+            />
           </span>
         </div>
       </div>
