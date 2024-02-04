@@ -11,13 +11,17 @@ export const getLocationWeather = async (location: string) => {
       const processedData = {
         name: name,
         main: main,
-        desc: weather[0].main,
+        desc: weather[0].main || '',
         dt: dt,
-        country: sys.country,
+        country: sys.country || '',
       }
       return processedData
     }
   } catch (err: any) {
-    throw new Error(err.message)
+    if (err?.response?.data?.cod === '404') {
+      throw new Error('City not found. Please try another input.')
+    } else {
+      throw new Error(err.message)
+    }
   }
 }

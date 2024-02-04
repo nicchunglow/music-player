@@ -40,20 +40,24 @@ const App: React.FC = () => {
   const [selectedHistory, setSelectedHistory] = useState<string>()
 
   const getWeather = async (location: string) => {
-    const res: any = await getLocationWeather(location)
-    setWeather(res)
-    const historyData = {
-      name: res.name,
-      country: res.country,
-      dt: res.dt,
+    try {
+      const res: any = await getLocationWeather(location)
+      setWeather(res)
+      const historyData = {
+        name: res.name,
+        country: res.country,
+        dt: res.dt,
+      }
+      setHistories((prevHistories) => {
+        const newArr = prevHistories
+          ? [historyData, ...prevHistories]
+          : [historyData]
+        saveToLocalStorage(newArr)
+        return newArr
+      })
+    } catch (err: any) {
+      alert(err.message)
     }
-    setHistories((prevHistories) => {
-      const newArr = prevHistories
-        ? [historyData, ...prevHistories]
-        : [historyData]
-      saveToLocalStorage(newArr)
-      return newArr
-    })
   }
 
   const handleSelectHistory = (index) => {
