@@ -43,7 +43,7 @@ const App: React.FC = () => {
         country: res.country,
         dt: res.dt,
       }
-      setHistories((prevHistories) => [...prevHistories, historyData])
+      setHistories((prevHistories) => [historyData, ...prevHistories])
     }
 
     if (search) {
