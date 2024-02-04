@@ -52,7 +52,7 @@ describe('Summary', () => {
       expect(Location).toHaveTextContent('Singapore,SG')
       expect(WeatherDesc).toHaveTextContent('Clouds')
       expect(Humidity).toHaveTextContent('Humidity : 57%')
-      expect(Date).toHaveTextContent('1707031344')
+      expect(Date).toHaveTextContent('02/04/2024 03:22 PM')
     })
   })
   describe('If No Data', () => {
@@ -87,7 +87,7 @@ describe('Summary', () => {
       expect(Location).toHaveTextContent('_,_')
       expect(WeatherDesc).toHaveTextContent('_')
       expect(Humidity).toHaveTextContent('Humidity : 0%')
-      expect(Date).toHaveTextContent('0')
+      expect(Date).toHaveTextContent('_')
     })
   })
 })

@@ -1,5 +1,6 @@
 import React from 'react'
 import { WeatherData } from '../../App/App.types'
+import { formatUnixTimestampToDate } from '../../shared/helper'
 
 type SummaryProps = {
   data: WeatherData
@@ -10,6 +11,8 @@ const Summary: React.FC<SummaryProps> = ({
   const mainTemp = Math.floor(main?.temp) || 0
   const HighestTemp = Math.floor(main?.temp_max) || 0
   const LowestTemp = Math.floor(main?.temp_min) || 0
+  const date = dt && formatUnixTimestampToDate(dt)
+
   return (
     <>
       <div aria-label='summary' className='w-full py-12'>
@@ -46,7 +49,7 @@ const Summary: React.FC<SummaryProps> = ({
               Humidity : {main?.humidity || 0}%
             </p>
             <p aria-label='date' className='text-sm text-grey'>
-              {dt || 0}
+              {date || '_'}
             </p>
           </span>
         </span>
