@@ -18,7 +18,7 @@ export const getLocationWeather = async (location: string) => {
       return processedData
     }
   } catch (err: any) {
-    if (err?.response?.data?.cod === '404') {
+    if (err?.response.status === 404) {
       throw new Error('City not found. Please try another input.')
     } else {
       throw new Error(err.message)
