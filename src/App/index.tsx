@@ -93,7 +93,7 @@ const App: React.FC = () => {
           width={'300px'}
           height={'300px'}
           src={Sun}
-          className='xm:w-52 absolute right-4 top-20 z-10 w-40 sm:right-28 md:right-32 md:w-72 lg:right-64 xl:right-[420px] xl:w-80'
+          className='xm:w-52 absolute right-4 top-20 z-10 w-40 sm:right-28 md:right-32 md:w-72 lg:right-64 lg:w-72 xl:right-[420px] xl:top-16'
           alt='Sun'
         />
         <div className='z-0 flex h-full w-11/12 flex-col items-center rounded-t-3xl border-[1px] border-white border-opacity-50 bg-white bg-opacity-25 md:w-10/12 lg:w-3/5 lg:max-w-[700px]'>
