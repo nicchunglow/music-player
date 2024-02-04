@@ -32,7 +32,7 @@ const defaultWeatherData: WeatherData = {
 const App: React.FC = () => {
   const [histories, setHistories] = useState<History[]>([])
   const [weather, setWeather] = useState<WeatherData>(defaultWeatherData)
-  const [search, setSearch] = useState('Singapore')
+  const [search, setSearch] = useState('')
 
   const getHistories = async () => {
     setHistories(mockHistory)
