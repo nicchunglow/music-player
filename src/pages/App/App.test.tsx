@@ -6,7 +6,7 @@ describe('App', () => {
     render(<App />)
   })
   it('renders', () => {
-    const element = screen.getByText('Hello')
+    const element = screen.getByText('Music Title')
     expect(element).toBeInTheDocument()
   })
 })

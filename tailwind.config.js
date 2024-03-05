@@ -11,12 +11,6 @@ export default {
       xl: '1044px',
     },
     extend: {},
-    colors: {
-      white: '#ffffff',
-      grey: '#666666',
-      primaryAccent: '#6C40B5',
-      red: '#ff2400',
-    },
   },
   plugins: [],
 }
