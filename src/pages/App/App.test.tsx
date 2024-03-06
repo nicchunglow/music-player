@@ -1,12 +1,14 @@
 import App from '.'
 import { render, screen } from '@testing-library/react'
 
+jest.mock('../../assets/music', () => '../../assets/music')
+
 describe('App', () => {
   beforeEach(() => {
     render(<App />)
   })
   it('renders', () => {
-    const element = screen.getByText('Music Title')
-    expect(element).toBeInTheDocument()
+    const player = screen.getByLabelText('player')
+    expect(player).toBeInTheDocument()
   })
 })
