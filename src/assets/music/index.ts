@@ -1,5 +1,7 @@
 import CatchAVibe from './Catch the Vibe.mp3'
 import Violet from './Connor Price - Violet.mp3'
+import Psychic from './Chris Brown - Psychic (Audio) ft. Jack Harlow.mp3'
+import JustDontLetGo from './Laberge - Just Dont Let Go ( Original Mix ).mp3'
 
 const songs = [
   {
@@ -16,15 +18,15 @@ const songs = [
   },
   {
     id: 3,
-    title: 'Violet 3',
-    artist: 'Connor Price',
-    audio: Violet,
+    title: "Just Don't Let Go",
+    artist: 'Laberge',
+    audio: JustDontLetGo,
   },
   {
     id: 4,
-    title: 'Violet 4',
-    artist: 'Connor Price',
-    audio: Violet,
+    title: 'Psychic',
+    artist: 'Chris Brown',
+    audio: Psychic,
   },
 ]
 
