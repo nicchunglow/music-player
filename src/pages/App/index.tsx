@@ -8,6 +8,8 @@ const App: React.FC = () => {
   useEffect(() => {
     setSelectedSong(songs[0])
   }, [])
+
+  const audio = new Audio(selectedSong?.song)
   return (
     <>
       <div className='flex h-screen flex-col items-center justify-center'>
@@ -30,7 +32,7 @@ const App: React.FC = () => {
             <span>
               ________________________________________________________________________
             </span>
-            <PlayerControls song={selectedSong.song} />
+            <PlayerControls audio={audio} />
           </div>
         </div>
       </div>
