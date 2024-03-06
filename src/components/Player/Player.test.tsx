@@ -1,5 +1,9 @@
 import { render, screen } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import configureMockStore from 'redux-mock-store'
+
 import Player from '.'
+import { RootState } from '@/store/reducers'
 
 const mockSelectedSong = {
   artist: 'Test Artist',
@@ -7,9 +11,23 @@ const mockSelectedSong = {
   title: 'Test Song',
 }
 
+const mockStore = configureMockStore<RootState>()
+const initialState: RootState = {
+  songs: {
+    songQueue: [0, 1, 2, 3],
+    currentSongIndex: 0,
+  },
+}
+
 describe('Player', () => {
   test('renders Player component with selected song information', () => {
-    render(<Player selectedSong={mockSelectedSong} />)
+    const store = mockStore(initialState)
+
+    render(
+      <Provider store={store}>
+        <Player selectedSong={mockSelectedSong} />
+      </Provider>
+    )
 
     const titleElement = screen.getByText('Test Song')
     const artistElement = screen.getByText('Test Artist')

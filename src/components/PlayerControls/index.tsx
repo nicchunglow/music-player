@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { Play, Pause, Next, Back } from '../../assets/images'
+import { useDispatch } from 'react-redux'
+
+import { Play, Pause, Next, Back } from '@/assets/images'
+import { selectNextSong } from '@/store/reducers/songSlice'
 import ButtonWithImage from '../ButtonWithImage'
 
 type PlayerControlsProps = {
@@ -10,6 +13,7 @@ type PlayerControlsProps = {
 }
 
 const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
+  const dispatch = useDispatch()
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
   const onHandleMusic = () => {
@@ -21,6 +25,12 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
       return newIsPlaying
     })
   }
+  const onHandleNext = () => {
+    audio?.pause()
+    setIsPlaying(false)
+    dispatch(selectNextSong())
+  }
+
   const playPauseConditionImage = isPlaying ? Pause : Play
   const playPauseConditionText = isPlaying ? 'pause' : 'play'
 
@@ -36,7 +46,7 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
           imgSrc={playPauseConditionImage}
           altText={playPauseConditionText}
         />
-        <ButtonWithImage imgSrc={Next} altText='next' />
+        <ButtonWithImage onClick={onHandleNext} imgSrc={Next} altText='next' />
       </div>
     </>
   )
