@@ -9,7 +9,7 @@ type PlayerControlsProps = {
   }
 }
 
-const PlayerControls: React.FC<PlayerControlsProps> = ({ audio }) => {
+const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
   const onHandleMusic = () => {
@@ -25,19 +25,21 @@ const PlayerControls: React.FC<PlayerControlsProps> = ({ audio }) => {
   const playPauseConditionText = isPlaying ? 'pause' : 'play'
 
   return (
-    <div
-      className='mt-4 flex w-full justify-evenly'
-      aria-label='player-controls'
-    >
-      <ButtonWithImage imgSrc={Back} altText='back' />
-      <ButtonWithImage
-        onClick={onHandleMusic}
-        imgSrc={playPauseConditionImage}
-        altText={playPauseConditionText}
-      />
-      <ButtonWithImage imgSrc={Next} altText='next' />
-    </div>
+    <>
+      <div
+        className='mt-4 flex w-full justify-evenly'
+        aria-label='player-controls'
+      >
+        <ButtonWithImage imgSrc={Back} altText='back' />
+        <ButtonWithImage
+          onClick={onHandleMusic}
+          imgSrc={playPauseConditionImage}
+          altText={playPauseConditionText}
+        />
+        <ButtonWithImage imgSrc={Next} altText='next' />
+      </div>
+    </>
   )
 }
 
-export default PlayerControls
+export default PlayerControl

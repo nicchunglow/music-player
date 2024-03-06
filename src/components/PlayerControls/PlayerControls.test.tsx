@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import PlayerControls from '.'
+import PlayerControl from '.'
 
 const audioMock = {
   play: jest.fn(),
@@ -11,7 +11,7 @@ describe('PlayerControls', () => {
     jest.resetAllMocks()
   })
   test('renders player controls', () => {
-    render(<PlayerControls audio={audioMock} />)
+    render(<PlayerControl audio={audioMock} />)
 
     const backButton = screen.getByAltText('back')
     const playButton = screen.getByAltText('play')
@@ -23,7 +23,7 @@ describe('PlayerControls', () => {
   })
 
   test('should have audioMock.play called after clicking play', () => {
-    render(<PlayerControls audio={audioMock} />)
+    render(<PlayerControl audio={audioMock} />)
 
     const playingButton = screen.getByAltText('play')
     fireEvent.click(playingButton)
@@ -32,7 +32,7 @@ describe('PlayerControls', () => {
     expect(audioMock.pause).not.toHaveBeenCalled()
   })
   test('should have audioMock.pause called after clicking pause, after it was played', () => {
-    render(<PlayerControls audio={audioMock} />)
+    render(<PlayerControl audio={audioMock} />)
 
     const playingButton = screen.getByAltText('play')
 
