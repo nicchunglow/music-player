@@ -6,9 +6,11 @@ import { RootState } from '@/store/reducers'
 import { selectPreviousSong } from '@/store/reducers/songSlice'
 
 const audioMock = {
-  play: jest.fn(),
-  pause: jest.fn(),
-  currentTime: 0,
+  current: {
+    play: jest.fn(),
+    pause: jest.fn(),
+    currentTime: 0,
+  },
 }
 
 const mockStore = configureMockStore<RootState>()
@@ -45,8 +47,8 @@ describe('PlayerControls', () => {
     const playingButton = screen.getByAltText('play')
     fireEvent.click(playingButton)
 
-    expect(audioMock.play).toHaveBeenCalledTimes(1)
-    expect(audioMock.pause).not.toHaveBeenCalled()
+    expect(audioMock.current.play).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.pause).not.toHaveBeenCalled()
   })
   test('should have audioMock.pause called after clicking pause, after it was played', () => {
     const playingButton = screen.getByAltText('play')
@@ -57,44 +59,44 @@ describe('PlayerControls', () => {
 
     fireEvent.click(playingButton)
 
-    expect(audioMock.play).toHaveBeenCalledTimes(1)
-    expect(audioMock.pause).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.play).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
   })
-  test('should have audioMock.pause called and dispatch selectNextSong after clicking next', () => {
+  test('should have audioMock.current.pause called and dispatch selectNextSong after clicking next', () => {
     const nextButton = screen.getByAltText('next')
     fireEvent.click(nextButton)
 
-    expect(audioMock.pause).toHaveBeenCalledTimes(1)
-    expect(audioMock.play).not.toHaveBeenCalled()
+    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.play).not.toHaveBeenCalled()
   })
-  test('should have audioMock.pause called and dispatch selectPreviousSong after clicking next', () => {
+  test('should have audioMock.current.pause called and dispatch selectPreviousSong after clicking next', () => {
     const nextButton = screen.getByAltText('back')
     fireEvent.click(nextButton)
 
-    expect(audioMock.pause).toHaveBeenCalledTimes(1)
-    expect(audioMock.play).not.toHaveBeenCalled()
+    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.play).not.toHaveBeenCalled()
   })
-  test('should have audioMock.pause called and dispatch selectPreviousSong after clicking back when currentTime is less than 3', () => {
-    audioMock.currentTime = 2
+  test('should have audioMock.current.pause called and dispatch selectPreviousSong after clicking back when currentTime is less than 3', () => {
+    audioMock.current.currentTime = 2
     const backButton = screen.getByAltText('back')
 
     fireEvent.click(backButton)
 
-    expect(audioMock.pause).toHaveBeenCalledTimes(1)
-    expect(audioMock.play).not.toHaveBeenCalled()
+    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.play).not.toHaveBeenCalled()
     waitFor(() => {
-      expect(audioMock.currentTime).toEqual(0)
+      expect(audioMock.current.currentTime).toEqual(0)
       expect(store.getActions()).toEqual([selectPreviousSong()])
     })
   })
-  test('should have audioMock.play called and reset currentTime after clicking back when currentTime is greater than or equal to 3', () => {
-    audioMock.currentTime = 4
+  test('should have audioMock.current.play called and reset currentTime after clicking back when currentTime is greater than or equal to 3', () => {
+    audioMock.current.currentTime = 4
     const backButton = screen.getByAltText('back')
     fireEvent.click(backButton)
 
-    expect(audioMock.play).toHaveBeenCalledTimes(1)
+    expect(audioMock.current.play).toHaveBeenCalledTimes(1)
     waitFor(() => {
-      expect(audioMock.currentTime).toEqual(0)
+      expect(audioMock.current.currentTime).toEqual(0)
       expect(store.getActions()).toEqual([])
     })
   })

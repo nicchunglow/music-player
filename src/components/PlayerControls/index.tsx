@@ -7,9 +7,11 @@ import ButtonWithImage from '../ButtonWithImage'
 
 type PlayerControlsProps = {
   audio?: {
-    pause: () => void
-    play: () => void
-    currentTime: number
+    current: {
+      pause: () => void
+      play: () => void
+      currentTime: number
+    }
   }
 }
 
@@ -21,7 +23,7 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
     setIsPlaying((prevIsPlaying) => {
       const newIsPlaying = !prevIsPlaying
       if (audio) {
-        newIsPlaying ? audio.play() : audio.pause()
+        newIsPlaying ? audio.current.play() : audio.current.pause()
       }
       return newIsPlaying
     })
@@ -29,18 +31,20 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
   const onHandleSongQueue = (action?: string | null) => {
     if (audio) {
       if (action === 'back') {
-        if (audio.currentTime < 3) {
-          audio.pause()
+        if (audio.current.currentTime < 3) {
+          audio.current.pause()
           setIsPlaying(false)
           dispatch(selectPreviousSong())
+          setIsPlaying(true)
         } else {
-          audio.currentTime = 0
-          audio.play()
+          audio.current.currentTime = 0
+          audio.current.play()
         }
       } else {
-        audio.pause()
         setIsPlaying(false)
+        audio.current.pause()
         dispatch(selectNextSong())
+        setIsPlaying(true)
       }
     }
   }

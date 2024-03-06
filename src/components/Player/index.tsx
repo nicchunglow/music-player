@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PlayerControl from '../PlayerControls'
 
 type PlayerProps = {
@@ -10,7 +10,13 @@ type PlayerProps = {
 }
 
 const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
-  const audio = new Audio(selectedSong?.audio)
+  const audioRef = useRef<HTMLAudioElement>(selectedSong?.audio)
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.src = selectedSong?.audio
+    }
+  }, [selectedSong])
   return (
     <>
       <img
@@ -24,10 +30,14 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
       >
         <h1 className='text-xl font-bold'>{selectedSong?.title}</h1>
         <h1 className='text-l'>{selectedSong?.artist}</h1>
+        <audio ref={audioRef} autoPlay>
+          <source type='audio/mp3' />
+          Your browser does not support the audio element.
+        </audio>
         <span>
           ________________________________________________________________________
         </span>
-        <PlayerControl audio={audio} />
+        <PlayerControl audio={audioRef} />
       </div>
     </>
   )
