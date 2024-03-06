@@ -1,12 +1,14 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import PlayerControl from '.'
 import { RootState } from '@/store/reducers'
+import { selectPreviousSong } from '@/store/reducers/songSlice'
 
 const audioMock = {
   play: jest.fn(),
   pause: jest.fn(),
+  currentTime: 0,
 }
 
 const mockStore = configureMockStore<RootState>()
@@ -18,8 +20,8 @@ const initialState: RootState = {
 }
 
 describe('PlayerControls', () => {
+  const store = mockStore(initialState)
   beforeEach(() => {
-    const store = mockStore(initialState)
     render(
       <Provider store={store}>
         <PlayerControl audio={audioMock} />
@@ -71,5 +73,29 @@ describe('PlayerControls', () => {
 
     expect(audioMock.pause).toHaveBeenCalledTimes(1)
     expect(audioMock.play).not.toHaveBeenCalled()
+  })
+  test('should have audioMock.pause called and dispatch selectPreviousSong after clicking back when currentTime is less than 3', () => {
+    audioMock.currentTime = 2
+    const backButton = screen.getByAltText('back')
+
+    fireEvent.click(backButton)
+
+    expect(audioMock.pause).toHaveBeenCalledTimes(1)
+    expect(audioMock.play).not.toHaveBeenCalled()
+    waitFor(() => {
+      expect(audioMock.currentTime).toEqual(0)
+      expect(store.getActions()).toEqual([selectPreviousSong()])
+    })
+  })
+  test('should have audioMock.play called and reset currentTime after clicking back when currentTime is greater than or equal to 3', () => {
+    audioMock.currentTime = 4
+    const backButton = screen.getByAltText('back')
+    fireEvent.click(backButton)
+
+    expect(audioMock.play).toHaveBeenCalledTimes(1)
+    waitFor(() => {
+      expect(audioMock.currentTime).toEqual(0)
+      expect(store.getActions()).toEqual([])
+    })
   })
 })

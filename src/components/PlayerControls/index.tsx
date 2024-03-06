@@ -9,6 +9,7 @@ type PlayerControlsProps = {
   audio?: {
     pause: () => void
     play: () => void
+    currentTime: number
   }
 }
 
@@ -26,14 +27,21 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
     })
   }
   const onHandleSongQueue = (action?: string | null) => {
-    if (action === 'back') {
-      audio?.pause()
-      setIsPlaying(false)
-      dispatch(selectPreviousSong())
-    } else {
-      audio?.pause()
-      setIsPlaying(false)
-      dispatch(selectNextSong())
+    if (audio) {
+      if (action === 'back') {
+        if (audio.currentTime < 3) {
+          audio.pause()
+          setIsPlaying(false)
+          dispatch(selectPreviousSong())
+        } else {
+          audio.currentTime = 0
+          audio.play()
+        }
+      } else {
+        audio.pause()
+        setIsPlaying(false)
+        dispatch(selectNextSong())
+      }
     }
   }
 
