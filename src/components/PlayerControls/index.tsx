@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Play, Pause, Next, Back } from '@/assets/images'
-import { selectNextSong } from '@/store/reducers/songSlice'
+import { selectNextSong, selectPreviousSong } from '@/store/reducers/songSlice'
 import ButtonWithImage from '../ButtonWithImage'
 
 type PlayerControlsProps = {
@@ -25,10 +25,16 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
       return newIsPlaying
     })
   }
-  const onHandleNext = () => {
-    audio?.pause()
-    setIsPlaying(false)
-    dispatch(selectNextSong())
+  const onHandleSongQueue = (action?: string | null) => {
+    if (action === 'back') {
+      audio?.pause()
+      setIsPlaying(false)
+      dispatch(selectPreviousSong())
+    } else {
+      audio?.pause()
+      setIsPlaying(false)
+      dispatch(selectNextSong())
+    }
   }
 
   const playPauseConditionImage = isPlaying ? Pause : Play
@@ -40,13 +46,21 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
         className='mt-4 flex w-full justify-evenly'
         aria-label='player-controls'
       >
-        <ButtonWithImage imgSrc={Back} altText='back' />
+        <ButtonWithImage
+          onClick={() => onHandleSongQueue('back')}
+          imgSrc={Back}
+          altText='back'
+        />
         <ButtonWithImage
           onClick={onHandleMusic}
           imgSrc={playPauseConditionImage}
           altText={playPauseConditionText}
         />
-        <ButtonWithImage onClick={onHandleNext} imgSrc={Next} altText='next' />
+        <ButtonWithImage
+          onClick={onHandleSongQueue}
+          imgSrc={Next}
+          altText='next'
+        />
       </div>
     </>
   )

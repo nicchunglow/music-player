@@ -65,4 +65,11 @@ describe('PlayerControls', () => {
     expect(audioMock.pause).toHaveBeenCalledTimes(1)
     expect(audioMock.play).not.toHaveBeenCalled()
   })
+  test('should have audioMock.pause called and dispatch selectPreviousSong after clicking next', () => {
+    const nextButton = screen.getByAltText('back')
+    fireEvent.click(nextButton)
+
+    expect(audioMock.pause).toHaveBeenCalledTimes(1)
+    expect(audioMock.play).not.toHaveBeenCalled()
+  })
 })

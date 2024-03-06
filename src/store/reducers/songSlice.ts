@@ -18,8 +18,16 @@ const songSlice = createSlice({
       state.currentSongIndex =
         (state.currentSongIndex + 1) % state.songQueue.length
     },
+    selectPreviousSong: (state) => {
+      if (state.currentSongIndex === 0) {
+        state.currentSongIndex = state.songQueue.length - 1
+      } else {
+        state.currentSongIndex =
+          (state.currentSongIndex - 1) % state.songQueue.length
+      }
+    },
   },
 })
 
-export const { selectNextSong } = songSlice.actions
+export const { selectNextSong, selectPreviousSong } = songSlice.actions
 export default songSlice.reducer
