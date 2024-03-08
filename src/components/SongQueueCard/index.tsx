@@ -6,9 +6,9 @@ const SongQueueCard: React.FC<SongQueueCard> = ({ title, artist }) => {
   return (
     <div
       aria-label={`${title}-song-card`}
-      className='roundedshadow-lg m-4 w-full max-w-sm overflow-hidden'
+      className='roundedshadow-lg w-full max-w-sm'
     >
-      <span className='px-6 py-4'>
+      <span className='px-6'>
         <h2 className='text-base font-bold'>{title}</h2>
         <p className=' text-base'>{artist}</p>
       </span>

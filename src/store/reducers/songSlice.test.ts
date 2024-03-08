@@ -9,7 +9,7 @@ import songReducer, {
 
 describe('songSlice', () => {
   const initialState: SongState = {
-    songQueue: [0, 1, 2, 3, 4, 5],
+    songQueue: songIdList,
     previousSongQueue: [],
     currentSongIndex: 0,
     isPlaying: false,
@@ -21,12 +21,20 @@ describe('songSlice', () => {
   })
 
   it('should handle selectNextSong', () => {
+    const initialState: SongState = {
+      songQueue: songIdList,
+      previousSongQueue: [],
+      currentSongIndex: 0,
+      isPlaying: false,
+      isShuffled: false,
+    }
     const state = songReducer(initialState, selectNextSong())
-
+    const newList = songIdList.slice(1)
     expect(state.currentSongIndex).toEqual(1)
-    expect(state.songQueue).toEqual([1, 2, 3, 4, 5])
+    expect(state.songQueue).toEqual(newList)
     expect(state.previousSongQueue).toEqual([0])
   })
+
   it('should handle selectPreviousSong', () => {
     const initialState: SongState = {
       songQueue: songIdList,
