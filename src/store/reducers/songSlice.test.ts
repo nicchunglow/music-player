@@ -62,11 +62,17 @@ describe('songSlice', () => {
   it('should handle isPlaying', () => {
     const state = songReducer(initialState, togglePlaying())
 
-    expect(state.isPlaying).toEqual(!initialState.isPlaying)
+    expect(state.isPlaying).not.toEqual(initialState.isPlaying)
   })
-  it('should handle isShuffled', () => {
-    const state = songReducer(initialState, toggleShuffle())
+  describe('Shuffle', () => {
+    it('should handle isShuffled', () => {
+      const state = songReducer(initialState, toggleShuffle())
 
-    expect(state.isShuffled).toEqual(!initialState.isShuffled)
+      expect(state.isShuffled).not.toEqual(initialState.isShuffled)
+    })
+    it('should have the playing song changed', () => {
+      const state = songReducer(initialState, toggleShuffle())
+      expect(state.currentSongIndex).not.toEqual(initialState.currentSongIndex)
+    })
   })
 })

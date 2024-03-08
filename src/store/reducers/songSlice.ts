@@ -57,6 +57,7 @@ const songSlice = createSlice({
       if (state.isShuffled) {
         const newOrder = shuffleQueue(state.songQueue)
         state.songQueue = newOrder
+        state.currentSongIndex = state.songQueue[0]
       }
     },
   },
