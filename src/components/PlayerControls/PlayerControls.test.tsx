@@ -16,7 +16,7 @@ const initialState = {
   songs: {
     songQueue: [0, 1, 2, 3],
     previousSongQueue: [],
-    currentSongIndex: 0,
+    currentSongId: 0,
     isPlaying: false,
     isShuffled: false,
   },

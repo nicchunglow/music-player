@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export type SongState = {
   songQueue: number[]
   previousSongQueue: number[]
-  currentSongIndex: number
+  currentSongId: number
   isPlaying: boolean
   isShuffled: boolean
 }
@@ -12,7 +12,7 @@ export type SongState = {
 const initialState: SongState = {
   songQueue: songIdList,
   previousSongQueue: [],
-  currentSongIndex: songIdList[0],
+  currentSongId: songIdList[0],
   isPlaying: false,
   isShuffled: false,
 }
@@ -26,14 +26,14 @@ const songSlice = createSlice({
       if (song !== undefined) {
         state.previousSongQueue.push(song)
       }
-      state.currentSongIndex = state.songQueue[0]
+      state.currentSongId = state.songQueue[0]
     },
     selectPreviousSong: (state) => {
       const song = state.previousSongQueue.pop()
       if (song !== undefined) {
         state.songQueue.unshift(song)
       }
-      state.currentSongIndex = state.songQueue[0]
+      state.currentSongId = state.songQueue[0]
     },
     togglePlaying: (state) => {
       state.isPlaying = !state.isPlaying
@@ -57,7 +57,7 @@ const songSlice = createSlice({
       if (state.isShuffled) {
         const newOrder = shuffleQueue(state.songQueue)
         state.songQueue = newOrder
-        state.currentSongIndex = state.songQueue[0]
+        state.currentSongId = state.songQueue[0]
       }
     },
   },
