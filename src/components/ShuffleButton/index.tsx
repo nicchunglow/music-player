@@ -15,11 +15,16 @@ const ShuffleButton: React.FC = () => {
   }
 
   return (
-    <ButtonWithImage
-      onClick={onHandleShuffle}
-      imgSrc={shuffledState ? SelectedShuffle : Shuffle}
-      altText='shuffle'
-    />
+    <div
+      aria-label='shuffle-button'
+      className={`bg-${shuffledState ? 'sky-400' : 'sky-100'} flex h-12 w-12 justify-center rounded-full`}
+    >
+      <ButtonWithImage
+        onClick={onHandleShuffle}
+        imgSrc={shuffledState ? SelectedShuffle : Shuffle}
+        altText='shuffle'
+      />
+    </div>
   )
 }
 
