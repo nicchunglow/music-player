@@ -16,6 +16,7 @@ const mockStore = configureMockStore<RootState>()
 const initialState: RootState = {
   songs: {
     songQueue: [0, 1, 2, 3],
+    previousSongQueue: [],
     currentSongIndex: 0,
     isPlaying: false,
   },

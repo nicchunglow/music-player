@@ -4,6 +4,7 @@ import configureMockStore from 'redux-mock-store'
 
 import Player from '.'
 import { RootState } from '@/store/reducers'
+import { songIdList } from '@/helper'
 
 const mockSelectedSong = {
   artist: 'Test Artist',
@@ -14,7 +15,8 @@ const mockSelectedSong = {
 const mockStore = configureMockStore<RootState>()
 const initialState: RootState = {
   songs: {
-    songQueue: [0, 1, 2, 3],
+    songQueue: songIdList,
+    previousSongQueue: [],
     currentSongIndex: 0,
     isPlaying: false,
   },

@@ -12,6 +12,7 @@ describe('App', () => {
   const initialState: RootState = {
     songs: {
       songQueue: songIdList,
+      previousSongQueue: [],
       currentSongIndex: 0,
       isPlaying: false,
     },

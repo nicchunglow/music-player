@@ -3,13 +3,15 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export type SongState = {
   songQueue: number[]
+  previousSongQueue: number[]
   currentSongIndex: number
   isPlaying: boolean
 }
 
 const initialState: SongState = {
   songQueue: songIdList,
-  currentSongIndex: 0,
+  previousSongQueue: [],
+  currentSongIndex: songIdList[0],
   isPlaying: false,
 }
 
@@ -18,16 +20,18 @@ const songSlice = createSlice({
   initialState,
   reducers: {
     selectNextSong: (state) => {
-      state.currentSongIndex =
-        (state.currentSongIndex + 1) % state.songQueue.length
+      const song = state.songQueue.shift()
+      if (song !== undefined) {
+        state.previousSongQueue.push(song)
+      }
+      state.currentSongIndex = state.songQueue[0]
     },
     selectPreviousSong: (state) => {
-      if (state.currentSongIndex === 0) {
-        state.currentSongIndex = state.songQueue.length - 1
-      } else {
-        state.currentSongIndex =
-          (state.currentSongIndex - 1) % state.songQueue.length
+      const song = state.previousSongQueue.pop()
+      if (song !== undefined) {
+        state.songQueue.unshift(song)
       }
+      state.currentSongIndex = state.songQueue[0]
     },
     setIsPlaying: (state) => {
       state.isPlaying = !state.isPlaying
