@@ -40,10 +40,29 @@ const songSlice = createSlice({
     },
     isShuffled: (state) => {
       state.isShuffled = !state.isShuffled
+      const shuffleQueue = (array) => {
+        let currentIndex = array.length
+
+        while (currentIndex > 0) {
+          const randomIndex = Math.floor(Math.random() * currentIndex)
+          currentIndex--
+          ;[array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+          ]
+        }
+
+        return array
+      }
+      if (state.isShuffled) {
+        const newOrder = shuffleQueue(state.songQueue)
+        state.songQueue = newOrder
+      }
     },
   },
 })
 
-export const { selectNextSong, selectPreviousSong, setIsPlaying } =
+export const { selectNextSong, selectPreviousSong, setIsPlaying, isShuffled } =
   songSlice.actions
+
 export default songSlice.reducer

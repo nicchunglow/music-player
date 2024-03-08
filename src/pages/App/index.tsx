@@ -4,6 +4,7 @@ import songs from '@/assets/music'
 import Player from '@/components/Player'
 import { RootState } from '@/store/reducers'
 import SongQueueList from '@/components/SongQueueList'
+import ShuffleButton from '@/components/ShuffleButton'
 
 const App: React.FC = () => {
   const currentSongIndex = useSelector(
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           rounded-3xl bg-white bg-opacity-25 md:w-10/12 lg:w-4/12 lg:max-w-[700px]'
       >
         <Player selectedSong={songs[currentSongIndex]} />
+        <ShuffleButton />
       </div>
       <SongQueueList {...{ songs, songQueue }} />
     </div>

@@ -1,15 +1,14 @@
-// songSlice.test.ts
-import songs from '@/assets/music'
+import { songIdList } from '@/helper'
 import songReducer, {
+  isShuffled,
   selectNextSong,
   selectPreviousSong,
   SongState,
 } from './songSlice'
 
 describe('songSlice', () => {
-  const songList = songs.map((song) => song.id)
   const initialState: SongState = {
-    songQueue: songList,
+    songQueue: [0, 1, 2, 3, 4, 5],
     previousSongQueue: [],
     currentSongIndex: 0,
     isPlaying: false,
@@ -24,10 +23,12 @@ describe('songSlice', () => {
     const state = songReducer(initialState, selectNextSong())
 
     expect(state.currentSongIndex).toEqual(1)
+    expect(state.songQueue).toEqual([1, 2, 3, 4, 5])
+    expect(state.previousSongQueue).toEqual([0])
   })
   it('should handle selectPreviousSong', () => {
     const initialState: SongState = {
-      songQueue: songList,
+      songQueue: songIdList,
       previousSongQueue: [],
       currentSongIndex: 1,
       isPlaying: false,
@@ -39,7 +40,7 @@ describe('songSlice', () => {
   })
   it('should handle selectPreviousSong, assuming there was previousSongQueue', () => {
     const initialState: SongState = {
-      songQueue: songList,
+      songQueue: songIdList,
       previousSongQueue: [0, 1],
       currentSongIndex: 2,
       isPlaying: false,
@@ -48,5 +49,10 @@ describe('songSlice', () => {
     const state = songReducer(initialState, selectPreviousSong())
 
     expect(state.currentSongIndex).toEqual(1)
+  })
+  it('should handle isShuffled', () => {
+    const state = songReducer(initialState, isShuffled())
+
+    expect(state.isShuffled).toEqual(!initialState.isShuffled)
   })
 })
