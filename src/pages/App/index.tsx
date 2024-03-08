@@ -32,7 +32,7 @@ const App: React.FC = () => {
         className='mx-4 flex h-[95vh] w-11/12 flex-col items-center justify-center
           rounded-3xl bg-white bg-opacity-25 md:w-10/12 lg:w-3/12 lg:max-w-[700px]'
       >
-        <h1>Song Queue</h1>
+        <h1 className='font-bold'>Song Queue</h1>
         {SongQueueGenerator}
       </div>
     </div>
