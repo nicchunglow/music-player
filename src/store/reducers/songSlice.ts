@@ -6,6 +6,7 @@ export type SongState = {
   previousSongQueue: number[]
   currentSongIndex: number
   isPlaying: boolean
+  isShuffled: boolean
 }
 
 const initialState: SongState = {
@@ -13,6 +14,7 @@ const initialState: SongState = {
   previousSongQueue: [],
   currentSongIndex: songIdList[0],
   isPlaying: false,
+  isShuffled: false,
 }
 
 const songSlice = createSlice({
@@ -35,6 +37,9 @@ const songSlice = createSlice({
     },
     setIsPlaying: (state) => {
       state.isPlaying = !state.isPlaying
+    },
+    isShuffled: (state) => {
+      state.isShuffled = !state.isShuffled
     },
   },
 })

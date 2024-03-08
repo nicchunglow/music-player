@@ -3,18 +3,18 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 
-import { RootState } from '@/store/reducers'
 import { songIdList } from '@/helper'
 
-const mockStore = configureMockStore<RootState>()
+const mockStore = configureMockStore()
 
 describe('App', () => {
-  const initialState: RootState = {
+  const initialState = {
     songs: {
       songQueue: songIdList,
       previousSongQueue: [],
       currentSongIndex: 0,
       isPlaying: false,
+      isShuffled: false,
     },
   }
   it('renders', () => {

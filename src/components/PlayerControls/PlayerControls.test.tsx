@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 import PlayerControl from '.'
-import { RootState } from '@/store/reducers'
 
 const audioMock = {
   current: {
@@ -12,13 +11,14 @@ const audioMock = {
   },
 }
 
-const mockStore = configureMockStore<RootState>()
-const initialState: RootState = {
+const mockStore = configureMockStore()
+const initialState = {
   songs: {
     songQueue: [0, 1, 2, 3],
     previousSongQueue: [],
     currentSongIndex: 0,
     isPlaying: false,
+    isShuffled: false,
   },
 }
 

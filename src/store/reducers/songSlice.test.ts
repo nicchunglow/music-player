@@ -13,6 +13,7 @@ describe('songSlice', () => {
     previousSongQueue: [],
     currentSongIndex: 0,
     isPlaying: false,
+    isShuffled: false,
   }
 
   it('should return the initial state', () => {
@@ -30,6 +31,7 @@ describe('songSlice', () => {
       previousSongQueue: [],
       currentSongIndex: 1,
       isPlaying: false,
+      isShuffled: false,
     }
     const state = songReducer(initialState, selectPreviousSong())
 
@@ -41,6 +43,7 @@ describe('songSlice', () => {
       previousSongQueue: [0, 1],
       currentSongIndex: 2,
       isPlaying: false,
+      isShuffled: false,
     }
     const state = songReducer(initialState, selectPreviousSong())
 
