@@ -12,5 +12,6 @@ export default {
     '@/(.*)': '<rootDir>/src/$1',
     'react-markdown':
       '<rootDir>/node_modules/react-markdown/react-markdown.min.js',
+    '\\.(mp3)$': '<rootDir>/src/assets/music/index.ts',
   },
 }

@@ -1,3 +1,4 @@
+import { songIdList } from '@/helper'
 import { createSlice } from '@reduxjs/toolkit'
 
 export type SongState = {
@@ -7,7 +8,7 @@ export type SongState = {
 }
 
 const initialState: SongState = {
-  songQueue: [0, 1, 2, 3],
+  songQueue: songIdList,
   currentSongIndex: 0,
   isPlaying: false,
 }

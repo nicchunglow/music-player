@@ -4,19 +4,18 @@ import { Provider } from 'react-redux'
 import configureMockStore from 'redux-mock-store'
 
 import { RootState } from '@/store/reducers'
-
-jest.mock('../../assets/music', () => '../../assets/music')
+import { songIdList } from '@/helper'
 
 const mockStore = configureMockStore<RootState>()
-const initialState: RootState = {
-  songs: {
-    songQueue: [0, 1, 2, 3],
-    currentSongIndex: 0,
-    isPlaying: false,
-  },
-}
 
 describe('App', () => {
+  const initialState: RootState = {
+    songs: {
+      songQueue: songIdList,
+      currentSongIndex: 0,
+      isPlaying: false,
+    },
+  }
   it('renders', () => {
     const store = mockStore(initialState)
 
