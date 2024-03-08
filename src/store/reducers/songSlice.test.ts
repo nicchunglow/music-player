@@ -51,7 +51,7 @@ describe('songSlice', () => {
     const initialState: SongState = {
       songQueue: songIdList,
       previousSongQueue: [0, 1],
-      currentSongId: 2,
+      currentSongId: 1,
       isPlaying: false,
       isShuffled: false,
     }
@@ -70,9 +70,16 @@ describe('songSlice', () => {
 
       expect(state.isShuffled).not.toEqual(initialState.isShuffled)
     })
-    it('should have the playing song changed', () => {
+    it('should not have the playing song changed if the song is playing', () => {
+      const initialState: SongState = {
+        songQueue: songIdList,
+        previousSongQueue: [],
+        currentSongId: 0,
+        isPlaying: true,
+        isShuffled: false,
+      }
       const state = songReducer(initialState, toggleShuffle())
-      expect(state.currentSongId).not.toEqual(initialState.currentSongId)
+      expect(state.currentSongId).toEqual(initialState.currentSongId)
     })
   })
 })
