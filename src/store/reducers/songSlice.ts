@@ -35,10 +35,10 @@ const songSlice = createSlice({
       }
       state.currentSongIndex = state.songQueue[0]
     },
-    setIsPlaying: (state) => {
+    togglePlaying: (state) => {
       state.isPlaying = !state.isPlaying
     },
-    isShuffled: (state) => {
+    toggleShuffle: (state) => {
       state.isShuffled = !state.isShuffled
       const shuffleQueue = (array) => {
         let currentIndex = array.length
@@ -62,7 +62,11 @@ const songSlice = createSlice({
   },
 })
 
-export const { selectNextSong, selectPreviousSong, setIsPlaying, isShuffled } =
-  songSlice.actions
+export const {
+  selectNextSong,
+  selectPreviousSong,
+  togglePlaying,
+  toggleShuffle,
+} = songSlice.actions
 
 export default songSlice.reducer

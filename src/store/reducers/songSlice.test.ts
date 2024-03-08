@@ -1,9 +1,10 @@
 import { songIdList } from '@/helper'
 import songReducer, {
-  isShuffled,
+  toggleShuffle,
   selectNextSong,
   selectPreviousSong,
   SongState,
+  togglePlaying,
 } from './songSlice'
 
 describe('songSlice', () => {
@@ -50,8 +51,13 @@ describe('songSlice', () => {
 
     expect(state.currentSongIndex).toEqual(1)
   })
+  it('should handle isPlaying', () => {
+    const state = songReducer(initialState, togglePlaying())
+
+    expect(state.isPlaying).toEqual(!initialState.isPlaying)
+  })
   it('should handle isShuffled', () => {
-    const state = songReducer(initialState, isShuffled())
+    const state = songReducer(initialState, toggleShuffle())
 
     expect(state.isShuffled).toEqual(!initialState.isShuffled)
   })

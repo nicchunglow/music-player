@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ButtonWithImage from '../ButtonWithImage'
 import { SelectedShuffle, Shuffle } from '@/assets/images'
-import { isShuffled } from '@/store/reducers/songSlice'
+import { toggleShuffle } from '@/store/reducers/songSlice'
 import { RootState } from '@/store/reducers'
 
 const ShuffleButton: React.FC = () => {
@@ -11,7 +11,7 @@ const ShuffleButton: React.FC = () => {
     (state: RootState) => state.songs.isShuffled
   )
   const onHandleShuffle = () => {
-    dispatch(isShuffled())
+    dispatch(toggleShuffle())
   }
 
   return (

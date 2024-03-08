@@ -5,7 +5,7 @@ import { Play, Pause, Next, Back } from '@/assets/images'
 import {
   selectNextSong,
   selectPreviousSong,
-  setIsPlaying,
+  togglePlaying,
 } from '@/store/reducers/songSlice'
 import ButtonWithImage from '../ButtonWithImage'
 
@@ -27,7 +27,7 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({
   const dispatch = useDispatch()
 
   const onHandleMusic = () => {
-    dispatch(setIsPlaying())
+    dispatch(togglePlaying())
   }
 
   const onHandleSongQueue = (action?: string | null) => {
