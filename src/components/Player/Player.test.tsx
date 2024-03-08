@@ -16,6 +16,7 @@ const initialState: RootState = {
   songs: {
     songQueue: [0, 1, 2, 3],
     currentSongIndex: 0,
+    isPlaying: false,
   },
 }
 

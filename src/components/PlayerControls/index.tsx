@@ -1,50 +1,45 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Play, Pause, Next, Back } from '@/assets/images'
-import { selectNextSong, selectPreviousSong } from '@/store/reducers/songSlice'
+import {
+  selectNextSong,
+  selectPreviousSong,
+  setIsPlaying,
+} from '@/store/reducers/songSlice'
 import ButtonWithImage from '../ButtonWithImage'
 
 type PlayerControlsProps = {
-  audio?: {
+  audioRef?: {
     current: {
       pause: () => void
       play: () => void
       currentTime: number
     }
   }
+  isPlaying?: boolean
 }
 
-const PlayerControl: React.FC<PlayerControlsProps> = ({ audio }) => {
+const PlayerControl: React.FC<PlayerControlsProps> = ({
+  audioRef,
+  isPlaying,
+}) => {
   const dispatch = useDispatch()
-  const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
   const onHandleMusic = () => {
-    setIsPlaying((prevIsPlaying) => {
-      const newIsPlaying = !prevIsPlaying
-      if (audio) {
-        newIsPlaying ? audio.current.play() : audio.current.pause()
-      }
-      return newIsPlaying
-    })
+    dispatch(setIsPlaying())
   }
+
   const onHandleSongQueue = (action?: string | null) => {
-    if (audio) {
+    if (audioRef) {
       if (action === 'back') {
-        if (audio.current.currentTime < 3) {
-          audio.current.pause()
-          setIsPlaying(false)
+        if (audioRef.current.currentTime < 3) {
           dispatch(selectPreviousSong())
-          setIsPlaying(true)
         } else {
-          audio.current.currentTime = 0
-          audio.current.play()
+          audioRef.current.currentTime = 0
         }
       } else {
-        setIsPlaying(false)
-        audio.current.pause()
         dispatch(selectNextSong())
-        setIsPlaying(true)
       }
     }
   }

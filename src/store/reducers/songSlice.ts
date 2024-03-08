@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export type SongState = {
   songQueue: number[]
   currentSongIndex: number
+  isPlaying: boolean
 }
 
 const initialState: SongState = {
   songQueue: [0, 1, 2, 3],
   currentSongIndex: 0,
+  isPlaying: false,
 }
 
 const songSlice = createSlice({
@@ -26,8 +28,12 @@ const songSlice = createSlice({
           (state.currentSongIndex - 1) % state.songQueue.length
       }
     },
+    setIsPlaying: (state) => {
+      state.isPlaying = !state.isPlaying
+    },
   },
 })
 
-export const { selectNextSong, selectPreviousSong } = songSlice.actions
+export const { selectNextSong, selectPreviousSong, setIsPlaying } =
+  songSlice.actions
 export default songSlice.reducer

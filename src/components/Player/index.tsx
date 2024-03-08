@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import PlayerControl from '../PlayerControls'
+import { RootState } from '@/store/reducers'
 
 type PlayerProps = {
   selectedSong?: {
@@ -11,12 +13,18 @@ type PlayerProps = {
 
 const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
   const audioRef = useRef<HTMLAudioElement>(selectedSong?.audio)
+  const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.src = selectedSong?.audio
     }
-  }, [selectedSong])
+    if (isPlaying) {
+      audioRef.current.play()
+    } else {
+      audioRef.current.pause()
+    }
+  }, [selectedSong, isPlaying])
   return (
     <>
       <img
@@ -30,14 +38,11 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
       >
         <h1 className='text-xl font-bold'>{selectedSong?.title}</h1>
         <h1 className='text-l'>{selectedSong?.artist}</h1>
-        <audio ref={audioRef} autoPlay>
+        <audio ref={audioRef}>
           <source type='audio/mp3' />
           Your browser does not support the audio element.
         </audio>
-        <span>
-          ________________________________________________________________________
-        </span>
-        <PlayerControl audio={audioRef} />
+        <PlayerControl {...{ audioRef, isPlaying }} />
       </div>
     </>
   )
