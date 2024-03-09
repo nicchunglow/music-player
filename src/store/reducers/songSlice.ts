@@ -33,17 +33,6 @@ const shuffleQueue = (array: number[]) => {
   return newArray
 }
 
-// const repeatQueue = (queue)=>{
-//   if (state.songQueue.length === 0) {
-//     if (state.isShuffled) {
-//       const shuffledList = shuffleQueue(songIdList)
-//       state.songQueue = shuffledList
-//     } else {
-//       state.songQueue = songIdList
-//     }
-//   }
-// }
-
 const songSlice = createSlice({
   name: 'songSlice',
   initialState,
