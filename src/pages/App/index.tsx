@@ -5,7 +5,6 @@ import Player from '@/components/Player'
 import { RootState } from '@/store/reducers'
 import SongQueueList from '@/components/SongQueueList'
 import ShuffleButton from '@/components/ShuffleButton'
-import RepeatButton from '@/components/RepeatButton'
 
 const App: React.FC = () => {
   const currentSongId = useSelector(
@@ -20,10 +19,7 @@ const App: React.FC = () => {
           rounded-3xl bg-white bg-opacity-25 md:w-10/12 lg:w-4/12 lg:max-w-[700px]'
       >
         <Player selectedSong={songs[currentSongId]} />
-        <span className='flex w-full justify-around'>
-          <ShuffleButton />
-          <RepeatButton />
-        </span>
+        <ShuffleButton />
       </div>
       <SongQueueList {...{ songs, songQueue }} />
     </div>

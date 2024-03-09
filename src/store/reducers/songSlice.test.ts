@@ -18,7 +18,6 @@ describe('songSlice', () => {
     currentSongId: 0,
     isPlaying: false,
     isShuffled: false,
-    isRepeated: false,
   }
 
   it('should return the initial state', () => {
@@ -32,7 +31,6 @@ describe('songSlice', () => {
         currentSongId: 0,
         isPlaying: false,
         isShuffled: false,
-        isRepeated: false,
       }
       const state = songReducer(initialState, selectNextSong())
       const newList = songIdList.slice(1)
@@ -47,7 +45,6 @@ describe('songSlice', () => {
         currentSongId: 0,
         isPlaying: false,
         isShuffled: false,
-        isRepeated: true,
       }
       const state = songReducer(initialState, selectNextSong())
       expect(state.songQueue).toEqual(songIdList)
@@ -59,7 +56,6 @@ describe('songSlice', () => {
         currentSongId: 0,
         isPlaying: false,
         isShuffled: true,
-        isRepeated: true,
       }
       const state = songReducer(initialState, selectNextSong())
       expect(state.songQueue.length).toEqual(songIdList.length)
@@ -72,7 +68,6 @@ describe('songSlice', () => {
       currentSongId: 1,
       isPlaying: false,
       isShuffled: false,
-      isRepeated: false,
     }
     const state = songReducer(initialState, selectPreviousSong())
 
@@ -85,7 +80,6 @@ describe('songSlice', () => {
       currentSongId: 1,
       isPlaying: false,
       isShuffled: false,
-      isRepeated: false,
     }
     const state = songReducer(initialState, selectPreviousSong())
 
@@ -112,7 +106,6 @@ describe('songSlice', () => {
           currentSongId: 8,
           isPlaying: false,
           isShuffled: true,
-          isRepeated: false,
         }
         const state = songReducer(initialState, toggleShuffle())
 
@@ -126,7 +119,6 @@ describe('songSlice', () => {
           currentSongId: 8,
           isPlaying: false,
           isShuffled: true,
-          isRepeated: false,
         }
 
         const stateAfterSelectNext = songReducer(initialState, selectNextSong())

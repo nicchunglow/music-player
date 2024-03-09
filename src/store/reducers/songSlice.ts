@@ -7,7 +7,6 @@ export type SongState = {
   currentSongId: number
   isPlaying: boolean
   isShuffled: boolean
-  isRepeated: boolean
 }
 
 const initialState: SongState = {
@@ -16,7 +15,6 @@ const initialState: SongState = {
   currentSongId: songIdList[0],
   isPlaying: false,
   isShuffled: false,
-  isRepeated: false,
 }
 const shuffleQueue = (array: number[]) => {
   const newArray = [...array]
@@ -52,7 +50,7 @@ const songSlice = createSlice({
   reducers: {
     selectNextSong: (state) => {
       const song = state.songQueue.shift()
-      if (state.songQueue.length === 0 && state.isRepeated) {
+      if (state.songQueue.length === 0) {
         if (state.isShuffled) {
           const shuffledList = shuffleQueue(songIdList)
           state.songQueue = shuffledList
@@ -92,9 +90,6 @@ const songSlice = createSlice({
         }
       }
     },
-    toggleRepeat: (state) => {
-      state.isRepeated = !state.isRepeated
-    },
   },
 })
 
@@ -103,7 +98,6 @@ export const {
   selectPreviousSong,
   togglePlaying,
   toggleShuffle,
-  toggleRepeat,
 } = songSlice.actions
 
 export default songSlice.reducer
