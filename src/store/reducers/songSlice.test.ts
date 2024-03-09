@@ -7,6 +7,10 @@ import songReducer, {
   togglePlaying,
 } from './songSlice'
 
+jest.mock('@/helper', () => ({
+  songIdList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+}))
+
 describe('songSlice', () => {
   const initialState: SongState = {
     songQueue: songIdList,
