@@ -17,7 +17,7 @@ const ShuffleButton: React.FC = () => {
   return (
     <div
       aria-label='shuffle-button'
-      className={`${shuffledState ? 'bg-sky-400' : 'bg-sky-100'} flex h-12 w-12 justify-center rounded-full`}
+      className={`${shuffledState ? 'bg-sky-400' : 'bg-white'} flex h-12 w-12 justify-center rounded-full`}
     >
       <ButtonWithImage
         onClick={onHandleShuffle}
