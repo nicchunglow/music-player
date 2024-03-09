@@ -7,6 +7,7 @@ export type SongState = {
   currentSongId: number
   isPlaying: boolean
   isShuffled: boolean
+  isRepeated: boolean
 }
 
 const initialState: SongState = {
@@ -15,7 +16,35 @@ const initialState: SongState = {
   currentSongId: songIdList[0],
   isPlaying: false,
   isShuffled: false,
+  isRepeated: false,
 }
+const shuffleQueue = (array: number[]) => {
+  const newArray = [...array]
+
+  let currentIndex = newArray.length
+
+  while (currentIndex > 0) {
+    const randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+    ;[newArray[currentIndex], newArray[randomIndex]] = [
+      newArray[randomIndex],
+      newArray[currentIndex],
+    ]
+  }
+
+  return newArray
+}
+
+// const repeatQueue = (queue)=>{
+//   if (state.songQueue.length === 0) {
+//     if (state.isShuffled) {
+//       const shuffledList = shuffleQueue(songIdList)
+//       state.songQueue = shuffledList
+//     } else {
+//       state.songQueue = songIdList
+//     }
+//   }
+// }
 
 const songSlice = createSlice({
   name: 'songSlice',
@@ -23,6 +52,14 @@ const songSlice = createSlice({
   reducers: {
     selectNextSong: (state) => {
       const song = state.songQueue.shift()
+      if (state.songQueue.length === 0 && state.isRepeated) {
+        if (state.isShuffled) {
+          const shuffledList = shuffleQueue(songIdList)
+          state.songQueue = shuffledList
+        } else {
+          state.songQueue = songIdList
+        }
+      }
       if (song !== undefined) {
         state.previousSongQueue.push(song)
       }
@@ -40,24 +77,13 @@ const songSlice = createSlice({
     },
     toggleShuffle: (state) => {
       state.isShuffled = !state.isShuffled
-      const shuffleQueue = (array) => {
-        let currentIndex = array.length
 
-        while (currentIndex > 0) {
-          const randomIndex = Math.floor(Math.random() * currentIndex)
-          currentIndex--
-          ;[array[currentIndex], array[randomIndex]] = [
-            array[randomIndex],
-            array[currentIndex],
-          ]
-        }
-
-        return array
-      }
       const currentSong = state.songQueue.shift()
       if (state.isShuffled) {
         const newOrder = shuffleQueue(state.songQueue)
-        newOrder.unshift(currentSong)
+        if (currentSong !== undefined) {
+          newOrder.unshift(currentSong)
+        }
         state.songQueue = newOrder
         state.currentSongId = state.songQueue[0]
       } else {
@@ -65,6 +91,9 @@ const songSlice = createSlice({
           state.songQueue = songIdList.slice(songIdList.indexOf(currentSong))
         }
       }
+    },
+    toggleRepeat: (state) => {
+      state.isRepeated = !state.isRepeated
     },
   },
 })
@@ -74,6 +103,7 @@ export const {
   selectPreviousSong,
   togglePlaying,
   toggleShuffle,
+  toggleRepeat,
 } = songSlice.actions
 
 export default songSlice.reducer

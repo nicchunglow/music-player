@@ -18,27 +18,53 @@ describe('songSlice', () => {
     currentSongId: 0,
     isPlaying: false,
     isShuffled: false,
+    isRepeated: false,
   }
 
   it('should return the initial state', () => {
     expect(songReducer(undefined, { type: 'unknown' })).toEqual(initialState)
   })
-
-  it('should handle selectNextSong', () => {
-    const initialState: SongState = {
-      songQueue: songIdList,
-      previousSongQueue: [],
-      currentSongId: 0,
-      isPlaying: false,
-      isShuffled: false,
-    }
-    const state = songReducer(initialState, selectNextSong())
-    const newList = songIdList.slice(1)
-    expect(state.currentSongId).toEqual(1)
-    expect(state.songQueue).toEqual(newList)
-    expect(state.previousSongQueue).toEqual([0])
+  describe('selectNextSong', () => {
+    it('should handle selectNextSong', () => {
+      const initialState: SongState = {
+        songQueue: songIdList,
+        previousSongQueue: [],
+        currentSongId: 0,
+        isPlaying: false,
+        isShuffled: false,
+        isRepeated: false,
+      }
+      const state = songReducer(initialState, selectNextSong())
+      const newList = songIdList.slice(1)
+      expect(state.currentSongId).toEqual(1)
+      expect(state.songQueue).toEqual(newList)
+      expect(state.previousSongQueue).toEqual([0])
+    })
+    it('should have new list if the there is no more next song but repeat is true', () => {
+      const initialState: SongState = {
+        songQueue: [],
+        previousSongQueue: [],
+        currentSongId: 0,
+        isPlaying: false,
+        isShuffled: false,
+        isRepeated: true,
+      }
+      const state = songReducer(initialState, selectNextSong())
+      expect(state.songQueue).toEqual(songIdList)
+    })
+    it('should have new shuffled list if no song in queue with isShuffled and isRepeated ', () => {
+      const initialState: SongState = {
+        songQueue: [],
+        previousSongQueue: [],
+        currentSongId: 0,
+        isPlaying: false,
+        isShuffled: true,
+        isRepeated: true,
+      }
+      const state = songReducer(initialState, selectNextSong())
+      expect(state.songQueue.length).toEqual(songIdList.length)
+    })
   })
-
   it('should handle selectPreviousSong', () => {
     const initialState: SongState = {
       songQueue: songIdList,
@@ -46,6 +72,7 @@ describe('songSlice', () => {
       currentSongId: 1,
       isPlaying: false,
       isShuffled: false,
+      isRepeated: false,
     }
     const state = songReducer(initialState, selectPreviousSong())
 
@@ -58,6 +85,7 @@ describe('songSlice', () => {
       currentSongId: 1,
       isPlaying: false,
       isShuffled: false,
+      isRepeated: false,
     }
     const state = songReducer(initialState, selectPreviousSong())
 
@@ -84,6 +112,7 @@ describe('songSlice', () => {
           currentSongId: 8,
           isPlaying: false,
           isShuffled: true,
+          isRepeated: false,
         }
         const state = songReducer(initialState, toggleShuffle())
 
@@ -97,6 +126,7 @@ describe('songSlice', () => {
           currentSongId: 8,
           isPlaying: false,
           isShuffled: true,
+          isRepeated: false,
         }
 
         const stateAfterSelectNext = songReducer(initialState, selectNextSong())
