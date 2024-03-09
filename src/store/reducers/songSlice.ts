@@ -54,16 +54,16 @@ const songSlice = createSlice({
 
         return array
       }
+      const currentSong = state.songQueue.shift()
       if (state.isShuffled) {
-        if (state.isPlaying) {
-          const currentSong = state.songQueue.shift()
-          const newOrder = shuffleQueue(state.songQueue)
-          newOrder.unshift(currentSong)
-          state.songQueue = newOrder
-        } else {
-          state.songQueue = shuffleQueue(state.songQueue)
-        }
+        const newOrder = shuffleQueue(state.songQueue)
+        newOrder.unshift(currentSong)
+        state.songQueue = newOrder
         state.currentSongId = state.songQueue[0]
+      } else {
+        if (currentSong !== undefined) {
+          state.songQueue = songIdList.slice(songIdList.indexOf(currentSong))
+        }
       }
     },
   },
