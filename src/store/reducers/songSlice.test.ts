@@ -73,7 +73,7 @@ describe('songSlice', () => {
       expect(state.currentSongId).toEqual(initialState.currentSongId)
     })
     describe('Unshuffle', () => {
-      it('return a shuffled queue to the original queue, with the current song being the new starting point  ', () => {
+      it('return a shuffled queue to the original queue, with the current song being the new starting point', () => {
         const initialState: SongState = {
           songQueue: [8, 2, 5],
           previousSongQueue: [],
@@ -86,15 +86,24 @@ describe('songSlice', () => {
         expect(state.isShuffled).not.toEqual(initialState.isShuffled)
         expect(state.songQueue).toEqual([8, 9])
       })
-      //start at different index, shuffle, next song, unshuffle, go to list with the song's index.
+      it('returns the original queue with the current song as the new starting point after selecting the next track and toggling shuffle', () => {
+        const initialState: SongState = {
+          songQueue: [8, 7, 5],
+          previousSongQueue: [],
+          currentSongId: 8,
+          isPlaying: false,
+          isShuffled: true,
+        }
 
-      // it('should return new list when unshuffled after being shuffled and choose next song.', () => {
-      //   const state = songReducer(initialState, toggleShuffle())
+        const stateAfterSelectNext = songReducer(initialState, selectNextSong())
 
-      //   expect(state.isShuffled).not.toEqual(initialState.isShuffled)
-      //   expect(state.songQueue[0]).toEqual(initialState.currentSongId)
-      //   expect(state.currentSongId).toEqual(initialState.currentSongId)
-      // })
+        expect(stateAfterSelectNext.songQueue).toEqual([7, 5])
+        expect(stateAfterSelectNext.currentSongId).toEqual(7)
+
+        const finalState = songReducer(stateAfterSelectNext, toggleShuffle())
+
+        expect(finalState.songQueue).toEqual([7, 8, 9])
+      })
     })
   })
 })
