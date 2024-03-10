@@ -4,10 +4,11 @@ import PlayerControl from '../PlayerControls'
 import { RootState } from '@/store/reducers'
 
 type PlayerProps = {
-  selectedSong?: {
-    artist?: string
-    audio?: any
-    title?: string
+  selectedSong: {
+    title: string
+    artist: string
+    audio: any
+    img?: string
   }
 }
 
@@ -27,11 +28,20 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
   }, [selectedSong, isPlaying])
   return (
     <>
-      <img
-        className='flex h-96 w-96 flex-col items-center justify-center 
+      {selectedSong.img ? (
+        <img
+          className='flex h-96 w-96 flex-col items-center justify-center 
           rounded-xl bg-white bg-opacity-25'
-        src='https://picsum.photos/500'
-      />
+          src={selectedSong?.img}
+        />
+      ) : (
+        <div
+          className='flex h-96 w-96 items-center justify-center
+          rounded-xl bg-white bg-opacity-40'
+        >
+          <h1>No Artist Image available</h1>
+        </div>
+      )}
       <div
         className='items-left my-8 flex h-48 w-11/12 flex-col items-center'
         aria-label='player'

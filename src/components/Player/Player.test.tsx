@@ -9,6 +9,7 @@ const mockSelectedSong = {
   artist: 'Test Artist',
   audio: 'path/to/test-song.mp3',
   title: 'Test Song',
+  img: '',
 }
 
 const mockStore = configureMockStore()
@@ -39,5 +40,18 @@ describe('Player', () => {
     expect(titleElement).toBeInTheDocument()
     expect(artistElement).toBeInTheDocument()
     expect(playerControlsElement).toBeInTheDocument()
+  })
+  test('renders Player even with no image available', () => {
+    const store = mockStore(initialState)
+
+    render(
+      <Provider store={store}>
+        <Player selectedSong={mockSelectedSong} />
+      </Provider>
+    )
+
+    const noImage = screen.getByText('No Artist Image available')
+
+    expect(noImage).toBeInTheDocument()
   })
 })
