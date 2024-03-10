@@ -98,7 +98,7 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
           Your browser does not support the audio element.
         </audio>
         <ProgressBar
-          {...{ timeProgress, duration, audioRef, progressBarRef }}
+          {...{ timeProgress, duration, audioRef, progressBarRef, isPlaying }}
         />
         <PlayerControl {...{ audioRef, isPlaying }} />
       </div>

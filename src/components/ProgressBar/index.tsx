@@ -3,8 +3,9 @@ import React, { ChangeEvent, RefObject } from 'react'
 type ProgressBarProps = {
   progressBarRef: any
   audioRef: RefObject<HTMLAudioElement>
-  timeProgress?: number
-  duration?: number
+  timeProgress: number
+  duration: number
+  isPlaying: boolean
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
@@ -12,6 +13,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   audioRef,
   timeProgress = 0,
   duration = 0,
+  isPlaying,
 }) => {
   const handleProgressChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.valueAsNumber
@@ -35,6 +37,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     <div className='progress flex w-full items-center justify-between'>
       <span className='text-sm text-gray-500'>{formatTime(timeProgress)}</span>
       <input
+        disabled={!isPlaying}
         type='range'
         ref={progressBarRef}
         defaultValue='0'
