@@ -11,6 +11,7 @@ const App: React.FC = () => {
     (state: RootState) => state.songs.currentSongId
   )
   const songQueue = useSelector((state: RootState) => state.songs.songQueue)
+  const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
 
   return (
     <div className='flex h-screen items-center justify-center'>
@@ -21,7 +22,7 @@ const App: React.FC = () => {
         <Player selectedSong={songs[currentSongId]} />
         <ShuffleButton />
       </div>
-      <SongQueueList {...{ songs, songQueue }} />
+      <SongQueueList {...{ songs, songQueue, isPlaying }} />
     </div>
   )
 }

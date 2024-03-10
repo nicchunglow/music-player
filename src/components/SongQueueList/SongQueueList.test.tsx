@@ -8,12 +8,37 @@ const mockSongs = [
 
 const mockSongQueue = [1, 2]
 
-test('renders SongQueueList component', () => {
-  render(<SongQueueList songs={mockSongs} songQueue={mockSongQueue} />)
+describe('SongQueueList', () => {
+  test('renders SongQueueList component with "now playing" text hidden', () => {
+    render(
+      <SongQueueList
+        songs={mockSongs}
+        songQueue={mockSongQueue}
+        isPlaying={false}
+      />
+    )
 
-  const headerElement = screen.getByText('Song Queue')
-  expect(headerElement).toBeInTheDocument()
+    const headerElement = screen.getByText('Song Queue')
+    expect(headerElement).toBeInTheDocument()
 
-  const songCards = screen.getAllByLabelText(/-song-card/i)
-  expect(songCards).toHaveLength(mockSongQueue.length)
+    const nowPlayingText = screen.getByText('now playing')
+    expect(nowPlayingText).toBeInTheDocument()
+    expect(nowPlayingText).toHaveClass('opacity-0')
+
+    const songCards = screen.getAllByLabelText(/song-card/i)
+    expect(songCards).toHaveLength(mockSongQueue.length)
+  })
+  test('should show now playing if isPlaying is true', () => {
+    render(
+      <SongQueueList
+        songs={mockSongs}
+        songQueue={mockSongQueue}
+        isPlaying={true}
+      />
+    )
+
+    const nowPlayingText = screen.getByText('now playing')
+    expect(nowPlayingText).toBeInTheDocument()
+    expect(nowPlayingText).toHaveClass('opacity-100')
+  })
 })
