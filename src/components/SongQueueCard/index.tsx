@@ -10,13 +10,13 @@ const SongQueueCard: React.FC<SongQueueCard> = ({ title, artist, id }) => {
   return (
     <div
       aria-label={`${id}-song-card`}
-      className='roundedshadow-lg w-full max-w-sm'
+      className='w-full max-w-sm px-4 hover:rounded hover:bg-gray-200 hover:text-black'
       onClick={() => {
         dispatch(selectSong(id))
       }}
     >
       <span className='px-6'>
-        <h2 className='text-base font-bold'>{title}</h2>
+        <h2 className='text-base font-bold '>{title}</h2>
         <p className=' text-base'>{artist}</p>
       </span>
     </div>
