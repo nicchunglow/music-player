@@ -1,5 +1,9 @@
 import { render, screen } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import configureMockStore from 'redux-mock-store'
 import SongQueueList from '.'
+
+const mockStore = configureMockStore()
 
 const mockSongs = [
   { id: 1, title: 'Song 1', artist: 'Artist 1', audio: 'song1.mp3' },
@@ -9,13 +13,26 @@ const mockSongs = [
 const mockSongQueue = [1, 2]
 
 describe('SongQueueList', () => {
+  const initialState = {
+    songs: {
+      songQueue: [0, 1, 2],
+      previousSongQueue: [],
+      currentSongId: 0,
+      isPlaying: false,
+      isShuffled: false,
+    },
+  }
+  const store = mockStore(initialState)
+
   test('renders SongQueueList component with "now playing" text hidden', () => {
     render(
-      <SongQueueList
-        songs={mockSongs}
-        songQueue={mockSongQueue}
-        isPlaying={false}
-      />
+      <Provider store={store}>
+        <SongQueueList
+          songs={mockSongs}
+          songQueue={mockSongQueue}
+          isPlaying={false}
+        />
+      </Provider>
     )
 
     const headerElement = screen.getByText('Song Queue')
@@ -30,11 +47,13 @@ describe('SongQueueList', () => {
   })
   test('should show now playing if isPlaying is true', () => {
     render(
-      <SongQueueList
-        songs={mockSongs}
-        songQueue={mockSongQueue}
-        isPlaying={true}
-      />
+      <Provider store={store}>
+        <SongQueueList
+          songs={mockSongs}
+          songQueue={mockSongQueue}
+          isPlaying={true}
+        />
+      </Provider>
     )
 
     const nowPlayingText = screen.getByText('now playing')

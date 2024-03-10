@@ -17,8 +17,8 @@ const SongQueueList: React.FC<SongQueueList> = ({
     const currentSong = songs.find((song) => song.id === songId)
 
     if (currentSong) {
-      const { title, artist } = currentSong
-      return <SongQueueCard key={songId} {...{ title, artist }} />
+      const { title, artist, id } = currentSong
+      return <SongQueueCard key={songId} {...{ title, artist, id }} />
     }
   })
   return (

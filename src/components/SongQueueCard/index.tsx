@@ -1,12 +1,19 @@
+import { selectSong } from '@/store/reducers/songSlice'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
-type SongQueueCard = { title: string; artist: string }
+type SongQueueCard = { title: string; artist: string; id: number }
 
-const SongQueueCard: React.FC<SongQueueCard> = ({ title, artist }) => {
+const SongQueueCard: React.FC<SongQueueCard> = ({ title, artist, id }) => {
+  const dispatch = useDispatch()
+
   return (
     <div
-      aria-label={`${title}-song-card`}
+      aria-label={`${id}-song-card`}
       className='roundedshadow-lg w-full max-w-sm'
+      onClick={() => {
+        dispatch(selectSong(id))
+      }}
     >
       <span className='px-6'>
         <h2 className='text-base font-bold'>{title}</h2>

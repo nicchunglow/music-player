@@ -5,6 +5,7 @@ import songReducer, {
   selectPreviousSong,
   SongState,
   togglePlaying,
+  selectSong,
 } from './songSlice'
 
 jest.mock('@/helper', () => ({
@@ -22,6 +23,20 @@ describe('songSlice', () => {
 
   it('should return the initial state', () => {
     expect(songReducer(undefined, { type: 'unknown' })).toEqual(initialState)
+  })
+  describe('selectSong', () => {
+    const initialState: SongState = {
+      songQueue: [1, 8, 9],
+      previousSongQueue: [],
+      currentSongId: 0,
+      isPlaying: false,
+      isShuffled: false,
+    }
+    it('should handle selectSong', () => {
+      const state = songReducer(initialState, selectSong(8))
+      expect(state.currentSongId).toEqual(8)
+      expect(state.songQueue).toEqual([8, 1, 9])
+    })
   })
   describe('selectNextSong', () => {
     it('should handle selectNextSong', () => {

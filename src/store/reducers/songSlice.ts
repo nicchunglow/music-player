@@ -52,6 +52,14 @@ const songSlice = createSlice({
       }
       state.currentSongId = state.songQueue[0]
     },
+    selectSong: (state, action) => {
+      const filterList = state.songQueue.filter(
+        (song) => song !== action.payload
+      )
+      filterList.unshift(action.payload)
+      state.songQueue = filterList
+      state.currentSongId = action.payload
+    },
     selectPreviousSong: (state) => {
       const song = state.previousSongQueue.pop()
       if (song !== undefined) {
@@ -83,6 +91,7 @@ const songSlice = createSlice({
 })
 
 export const {
+  selectSong,
   selectNextSong,
   selectPreviousSong,
   togglePlaying,
