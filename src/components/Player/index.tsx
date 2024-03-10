@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PlayerControl from '../PlayerControls'
 import { RootState } from '@/store/reducers'
+import ProgressBar from '../ProgressBar'
 
 type PlayerProps = {
   selectedSong: {
@@ -13,8 +14,34 @@ type PlayerProps = {
 }
 
 const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
+  const [timeProgress, setTimeProgress] = useState<number>(0)
+  const [duration, setDuration] = useState<number>(0)
+
   const audioRef = useRef<HTMLAudioElement>(selectedSong?.audio)
+  const progressBarRef = useRef<HTMLInputElement>(null)
+  const playAnimationRef = useRef<number | null>(null)
+
   const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
+
+  const onLoadedMetadata = () => {
+    const seconds = audioRef.current.duration
+    setDuration(seconds)
+  }
+
+  const repeat = useCallback(() => {
+    const currentTime = audioRef?.current?.currentTime
+    setTimeProgress(currentTime)
+
+    if (progressBarRef.current) {
+      progressBarRef.current.value = currentTime.toString()
+      progressBarRef.current.style.setProperty(
+        '--range-progress',
+        `${(currentTime / duration) * 100}%`
+      )
+    }
+
+    playAnimationRef.current = requestAnimationFrame(repeat)
+  }, [audioRef, duration, progressBarRef])
 
   useEffect(() => {
     if (audioRef.current) {
@@ -25,7 +52,9 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
     } else {
       audioRef.current.pause()
     }
-  }, [selectedSong, isPlaying])
+    playAnimationRef.current = requestAnimationFrame(repeat)
+  }, [selectedSong, isPlaying, repeat])
+
   return (
     <>
       {selectedSong.img ? (
@@ -48,10 +77,13 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
       >
         <h1 className='text-xl font-bold'>{selectedSong?.title}</h1>
         <h1 className='text-l'>{selectedSong?.artist}</h1>
-        <audio ref={audioRef}>
+        <audio ref={audioRef} onLoadedMetadata={onLoadedMetadata}>
           <source type='audio/mp3' />
           Your browser does not support the audio element.
         </audio>
+        <ProgressBar
+          {...{ timeProgress, duration, audioRef, progressBarRef }}
+        />
         <PlayerControl {...{ audioRef, isPlaying }} />
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react'
+import React, { ChangeEvent, RefObject } from 'react'
 
 type ProgressBarProps = {
   progressBarRef: any
@@ -13,9 +13,10 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   timeProgress = 0,
   duration = 0,
 }) => {
-  const handleProgressChange = () => {
+  const handleProgressChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.valueAsNumber
     if (audioRef.current) {
-      audioRef.current.currentTime = progressBarRef.current?.valueAsNumber || 0
+      audioRef.current.currentTime = newValue
     }
   }
 
@@ -37,8 +38,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         type='range'
         ref={progressBarRef}
         defaultValue='0'
+        max={duration}
         onChange={handleProgressChange}
-        className='h-1 w-full flex-grow cursor-pointer rounded-full'
+        className='h-1 w-full flex-grow cursor-pointer rounded'
       />
       <span className='text-sm text-gray-500'>{formatTime(duration)}</span>
     </div>
