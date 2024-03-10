@@ -10,6 +10,7 @@ const mockSelectedSong = {
   audio: 'path/to/test-song.mp3',
   title: 'Test Song',
   img: '',
+  id: '',
 }
 
 const mockStore = configureMockStore()

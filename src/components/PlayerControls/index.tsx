@@ -11,7 +11,7 @@ import ButtonWithImage from '../ButtonWithImage'
 
 type PlayerControlsProps = {
   audioRef?: {
-    current: {
+    current?: {
       pause: () => void
       play: () => void
       currentTime: number
@@ -31,7 +31,7 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({
   }
 
   const onHandleSongQueue = (action?: string | null) => {
-    if (audioRef) {
+    if (audioRef?.current) {
       if (action === 'back') {
         if (audioRef.current.currentTime < 3) {
           dispatch(selectPreviousSong())

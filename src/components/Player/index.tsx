@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import PlayerControl from '../PlayerControls'
 import { RootState } from '@/store/reducers'
+import PlayerControl from '../PlayerControls'
 import ProgressBar from '../ProgressBar'
 
 type PlayerProps = {
@@ -9,6 +9,7 @@ type PlayerProps = {
     title: string
     artist: string
     audio: any
+    id: any
     img?: string
   }
 }
@@ -17,19 +18,19 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
   const [timeProgress, setTimeProgress] = useState<number>(0)
   const [duration, setDuration] = useState<number>(0)
 
-  const audioRef = useRef<HTMLAudioElement>(selectedSong?.audio)
+  const audioRef = useRef<any>(null)
   const progressBarRef = useRef<HTMLInputElement>(null)
   const playAnimationRef = useRef<number | null>(null)
 
   const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
 
   const onLoadedMetadata = () => {
-    const seconds = audioRef.current.duration
+    const seconds = audioRef?.current?.duration || 0
     setDuration(seconds)
   }
 
   const repeat = useCallback(() => {
-    const currentTime = audioRef?.current?.currentTime
+    const currentTime = audioRef?.current?.currentTime || 0
     setTimeProgress(currentTime)
 
     if (progressBarRef.current) {
@@ -46,14 +47,16 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.src = selectedSong?.audio
+      audioRef.current.currentTime = 0
     }
-    if (isPlaying) {
+    if (isPlaying && audioRef.current) {
+      audioRef.current.currentTime = timeProgress
       audioRef.current.play()
     } else {
-      audioRef.current.pause()
+      audioRef?.current?.pause()
     }
     playAnimationRef.current = requestAnimationFrame(repeat)
-  }, [selectedSong, isPlaying, repeat])
+  }, [selectedSong, isPlaying, repeat, timeProgress])
 
   return (
     <>
