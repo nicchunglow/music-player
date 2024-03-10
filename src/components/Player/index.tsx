@@ -18,7 +18,7 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
   const [timeProgress, setTimeProgress] = useState<number>(0)
   const [duration, setDuration] = useState<number>(0)
 
-  const audioRef = useRef<any>(null)
+  const audioRef = useRef<HTMLAudioElement>(selectedSong?.audio)
   const progressBarRef = useRef<HTMLInputElement>(null)
   const playAnimationRef = useRef<number | null>(null)
 
@@ -45,18 +45,24 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
   }, [audioRef, duration, progressBarRef])
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = selectedSong?.audio
-      audioRef.current.currentTime = 0
+    const audioElement = audioRef.current
+
+    if (audioElement) {
+      audioElement.src = selectedSong?.audio
     }
-    if (isPlaying && audioRef.current) {
-      audioRef.current.currentTime = timeProgress
-      audioRef.current.play()
-    } else {
-      audioRef?.current?.pause()
+
+    if (audioElement && isPlaying) {
+      audioElement.play()
+    } else if (audioElement) {
+      audioElement.pause()
     }
+
     playAnimationRef.current = requestAnimationFrame(repeat)
-  }, [selectedSong, isPlaying, repeat, timeProgress])
+
+    return () => {
+      cancelAnimationFrame(playAnimationRef?.current || 0)
+    }
+  }, [selectedSong, isPlaying, repeat])
 
   return (
     <>
