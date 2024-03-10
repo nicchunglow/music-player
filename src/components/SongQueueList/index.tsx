@@ -1,18 +1,17 @@
 import { Song } from '@/sharedTypes'
 import React from 'react'
 import SongQueueCard from '../SongQueueCard'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/reducers'
 
 type SongQueueList = {
-  songQueue: number[]
   songs: Song[]
-  isPlaying: boolean
 }
 
-const SongQueueList: React.FC<SongQueueList> = ({
-  songs,
-  songQueue,
-  isPlaying,
-}) => {
+const SongQueueList: React.FC<SongQueueList> = ({ songs }) => {
+  const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
+  const songQueue = useSelector((state: RootState) => state.songs.songQueue)
+
   const SongQueueGenerator = songQueue.map((songId) => {
     const currentSong = songs.find((song) => song.id === songId)
 
@@ -21,6 +20,7 @@ const SongQueueList: React.FC<SongQueueList> = ({
       return <SongQueueCard key={songId} {...{ title, artist, id }} />
     }
   })
+
   return (
     <div
       className=' mx-4 flex h-[95vh] w-11/12

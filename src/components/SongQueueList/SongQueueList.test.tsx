@@ -13,25 +13,20 @@ const mockSongs = [
 const mockSongQueue = [1, 2]
 
 describe('SongQueueList', () => {
-  const initialState = {
-    songs: {
-      songQueue: [0, 1, 2],
-      previousSongQueue: [],
-      currentSongId: 0,
-      isPlaying: false,
-      isShuffled: false,
-    },
-  }
-  const store = mockStore(initialState)
-
   test('renders SongQueueList component with "now playing" text hidden', () => {
+    const initialState = {
+      songs: {
+        songQueue: [0, 1, 2],
+        previousSongQueue: [],
+        currentSongId: 0,
+        isPlaying: false,
+        isShuffled: false,
+      },
+    }
+    const store = mockStore(initialState)
     render(
       <Provider store={store}>
-        <SongQueueList
-          songs={mockSongs}
-          songQueue={mockSongQueue}
-          isPlaying={false}
-        />
+        <SongQueueList songs={mockSongs} />
       </Provider>
     )
 
@@ -46,13 +41,19 @@ describe('SongQueueList', () => {
     expect(songCards).toHaveLength(mockSongQueue.length)
   })
   test('should show now playing if isPlaying is true', () => {
+    const initialState = {
+      songs: {
+        songQueue: [0, 1, 2],
+        previousSongQueue: [],
+        currentSongId: 0,
+        isPlaying: true,
+        isShuffled: false,
+      },
+    }
+    const store = mockStore(initialState)
     render(
       <Provider store={store}>
-        <SongQueueList
-          songs={mockSongs}
-          songQueue={mockSongQueue}
-          isPlaying={true}
-        />
+        <SongQueueList songs={mockSongs} />
       </Provider>
     )
 
