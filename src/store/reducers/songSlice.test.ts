@@ -18,7 +18,7 @@ describe('songSlice', () => {
     previousSongQueue: [],
     currentSongId: 0,
     isPlaying: false,
-    isShuffled: false,
+    isShuffled: true,
   }
 
   it('should return the initial state', () => {

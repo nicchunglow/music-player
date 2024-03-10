@@ -14,7 +14,7 @@ const initialState: SongState = {
   previousSongQueue: [],
   currentSongId: songIdList[0],
   isPlaying: false,
-  isShuffled: false,
+  isShuffled: true,
 }
 const shuffleQueue = (array: number[]) => {
   const newArray = [...array]
