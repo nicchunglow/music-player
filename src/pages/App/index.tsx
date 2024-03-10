@@ -20,7 +20,7 @@ const App: React.FC = () => {
         <Player selectedSong={songs[currentSongId]} />
         <ShuffleButton />
       </div>
-      <SongQueueList {...{ songs }} />
+      <SongQueueList songs={songs} />
     </div>
   )
 }
