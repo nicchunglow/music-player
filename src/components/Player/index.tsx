@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/reducers'
 import PlayerControl from '../PlayerControls'
 import ProgressBar from '../ProgressBar'
+import { selectNextSong } from '@/store/reducers/songSlice'
 
 type PlayerProps = {
   selectedSong: {
@@ -15,14 +16,15 @@ type PlayerProps = {
 }
 
 const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
+  const dispatch = useDispatch()
+  const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
+
   const [timeProgress, setTimeProgress] = useState<number>(0)
   const [duration, setDuration] = useState<number>(0)
 
   const audioRef = useRef<HTMLAudioElement>(selectedSong?.audio)
   const progressBarRef = useRef<HTMLInputElement>(null)
   const playAnimationRef = useRef<number | null>(null)
-
-  const isPlaying = useSelector((state: RootState) => state.songs.isPlaying)
 
   const onLoadedMetadata = () => {
     const seconds = audioRef?.current?.duration || 0
@@ -86,7 +88,12 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
       >
         <h1 className='text-xl font-bold'>{selectedSong?.title}</h1>
         <h1 className='text-l'>{selectedSong?.artist}</h1>
-        <audio ref={audioRef} onLoadedMetadata={onLoadedMetadata}>
+        <audio
+          aria-label='audio-element'
+          ref={audioRef}
+          onEnded={() => dispatch(selectNextSong())}
+          onLoadedMetadata={onLoadedMetadata}
+        >
           <source type='audio/mp3' />
           Your browser does not support the audio element.
         </audio>
