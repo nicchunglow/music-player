@@ -75,8 +75,8 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
     <>
       {selectedSong.img ? (
         <img
-          className='flex h-96 w-96 flex-col items-center justify-center 
-          rounded-xl bg-white bg-opacity-25'
+          className='flex h-full w-full flex-col items-center 
+          justify-center rounded-xl bg-white bg-opacity-25 md:max-h-96 md:max-w-96'
           src={selectedSong?.img}
         />
       ) : (

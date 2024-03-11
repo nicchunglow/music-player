@@ -23,9 +23,9 @@ const SongQueueList: React.FC<SongQueueList> = ({ songs }) => {
 
   return (
     <div
-      className=' mx-4 flex h-[95vh] w-11/12
-        flex-col items-center rounded-3xl bg-white 
-        bg-opacity-25 md:w-9/12 lg:w-3/12 lg:max-w-[700px]'
+      className=' mx-4 flex h-[95vh] min-h-96
+        w-11/12 flex-col items-center rounded-3xl 
+        bg-white bg-opacity-25 md:w-9/12 lg:w-3/12 lg:max-w-[700px]'
     >
       <h1 className='mt-12 text-xl font-bold'>Song Queue</h1>
       <p
