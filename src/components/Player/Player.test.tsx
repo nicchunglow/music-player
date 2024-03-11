@@ -10,7 +10,7 @@ const mockSelectedSong = {
   audio: jest.mock,
   title: 'Test Song',
   img: '',
-  id: '',
+  id: 1,
 }
 
 const mockStore = configureMockStore()

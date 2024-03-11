@@ -10,7 +10,7 @@ type PlayerProps = {
     title: string
     artist: string
     audio: any
-    id: any
+    id: number
     img?: string
   }
 }
