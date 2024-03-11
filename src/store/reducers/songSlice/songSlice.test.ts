@@ -85,6 +85,17 @@ describe('songSlice', () => {
       const state = songReducer(initialState, selectNextSong())
       expect(state.songQueue).not.toEqual(state.previousSongQueue)
     })
+    it('should have emptyPreviousQueue if a new list is introduced', () => {
+      const initialState: SongState = {
+        songQueue: [],
+        previousSongQueue: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+        currentSongId: 0,
+        isPlaying: false,
+        isShuffled: true,
+      }
+      const state = songReducer(initialState, selectNextSong())
+      expect(state.previousSongQueue).toEqual([])
+    })
   })
   it('should handle selectPreviousSong', () => {
     const initialState: SongState = {

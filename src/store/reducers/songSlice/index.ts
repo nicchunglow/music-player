@@ -26,7 +26,8 @@ const songSlice = createSlice({
   reducers: {
     selectNextSong: (state) => {
       const song = state.songQueue.shift()
-      if (state.songQueue.length === 0) {
+      const tempSongQueue = state.songQueue
+      if (tempSongQueue.length === 0) {
         if (state.isShuffled) {
           let shuffledList = shuffleList(songIdList)
 
@@ -41,8 +42,9 @@ const songSlice = createSlice({
         } else {
           state.songQueue = songIdList
         }
+        state.previousSongQueue = []
       }
-      if (song !== undefined) {
+      if (song !== undefined && tempSongQueue.length !== 0) {
         state.previousSongQueue.push(song)
       }
       state.currentSongId = state.songQueue[0]
