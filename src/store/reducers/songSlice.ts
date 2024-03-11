@@ -9,10 +9,11 @@ export type SongState = {
   isShuffled: boolean
 }
 
+const shuffledList = shuffleQueue(songIdList)
 const initialState: SongState = {
-  songQueue: shuffleQueue(songIdList),
+  songQueue: shuffledList,
   previousSongQueue: [],
-  currentSongId: songIdList[0],
+  currentSongId: shuffledList[0],
   isPlaying: false,
   isShuffled: true,
 }
