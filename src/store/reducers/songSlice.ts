@@ -10,7 +10,7 @@ export type SongState = {
 }
 
 const initialState: SongState = {
-  songQueue: songIdList,
+  songQueue: shuffleQueue(songIdList),
   previousSongQueue: [],
   currentSongId: songIdList[0],
   isPlaying: false,
