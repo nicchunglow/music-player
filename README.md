@@ -9,15 +9,13 @@
   - [What was done](#What-was-done)
 
 - [Code Structure and considerations](#Code-Structure-and-considerations)
-  - [Code Structure](#Code-structure)
-  - [Code Considerations](#Code-Considerations)
+  - [Code Structure](#code-structure)
+  - [Code Considerations](#code-considerations)
 - [Setup](#Setup)
 
-- [Available Scripts](#Available-Scripts)
+- [Available Scripts](#available-scripts)
 
-- [Technologies](#Technologies)
-
-- [Environment Variables](#Environment-Variables)
+- [Packages](#packages)
 
 - [Improvements](#Improvements)
 
@@ -94,7 +92,7 @@ the current app is mobile-responsive, with the recommended viewing dimensions at
 
 ### Shuffle
 
-- I will be able to unshuffle my playlist if I choose to, which will return the orignal order of the music, whichever it may be.
+- I will be able to unshuffle my playlist if I choose to, which will return the orignal order of the music, whichever the index may be.
 - my current track will not be shuffled so that I will have control of what I want to do with the current track
 
 ### Song Queue
@@ -200,7 +198,7 @@ https://react.dev/learn/start-a-new-react-project#can-i-use-react-without-a-fram
 
 - For our repeat music player, when we introduce a new list, the previousQueue will be used for comparison to ensure it is not the same list. After which, the previousQueue will be removed. This consideration is also based by a user starting fresh with a new queue of songs.
 
-- Based on user behaviour, back button repeat same song is introduced. Hence, when you click the back button that has the song played more than 3 seconds, it will do a repeat. When it is under 3 seconds, it will go to the previous song. This behaviour is similar to existing music players availale.
+- Based on user considerations, back button repeat same song is introduced. Hence, when you click the back button that has the song played more than 3 seconds, it will do a repeat. When it is under 3 seconds, it will go to the previous song. This behaviour is similar to existing music players availale.
 
 #### Queue Logic
 
@@ -237,7 +235,7 @@ $ npm run dev
   "prepare": "husky"
 ```
 
-## Technologies
+## Packages
 
 dependencies:
 
@@ -249,3 +247,11 @@ dependencies:
 ```
 
 ## Improvements
+
+- Add Redux Thunk if the application goes from local stored song files to API based.
+
+- Improve testing as there are some parts of the code challenging to cover. e.g progressBar
+
+- Add storybook for components documentations
+
+- Add theming for dark and light mode.
