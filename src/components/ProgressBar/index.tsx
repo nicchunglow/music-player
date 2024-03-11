@@ -4,8 +4,8 @@ import React, { ChangeEvent, RefObject } from 'react'
 type ProgressBarProps = {
   progressBarRef: any
   audioRef: RefObject<HTMLAudioElement>
-  timeProgress?: number
-  duration?: number
+  timeProgress: number
+  duration: number
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({

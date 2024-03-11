@@ -20,14 +20,14 @@ import { RootState } from '@/store/reducers'
 import ButtonWithImage from '../ButtonWithImage'
 
 type PlayerControlsProps = {
-  audioRef?: {
-    current?: {
+  audioRef: {
+    current: {
       pause: () => void
       play: () => void
       currentTime: number
     }
   }
-  isPlaying?: boolean
+  isPlaying: boolean
 }
 
 const PlayerControl: React.FC<PlayerControlsProps> = ({

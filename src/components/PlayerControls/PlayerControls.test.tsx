@@ -31,7 +31,7 @@ describe('PlayerControl', () => {
     }
     render(
       <Provider store={store}>
-        <PlayerControl audioRef={audioRefMock} />
+        <PlayerControl audioRef={audioRefMock} isPlaying={false} />
       </Provider>
     )
   })

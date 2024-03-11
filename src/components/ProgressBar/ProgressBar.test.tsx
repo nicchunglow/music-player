@@ -11,6 +11,8 @@ describe('ProgressBar', () => {
       <ProgressBar
         progressBarRef={progressBarRefMock}
         audioRef={audioRefMock}
+        timeProgress={0}
+        duration={0}
       />
     )
   })
