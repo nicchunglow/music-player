@@ -1,80 +1,65 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import configureMockStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store'
 import PlayerControl from '.'
+import {
+  selectNextSong,
+  selectPreviousSong,
+  togglePlaying,
+  toggleShuffle,
+} from '@/store/reducers/songSlice'
 
-const audioMock = {
-  current: {
-    play: jest.fn(() => {}),
-    pause: jest.fn(() => {}),
-    currentTime: 0,
-  },
-}
+const mockStore = configureStore()
 
-const mockStore = configureMockStore()
-const initialState = {
-  songs: {
-    songQueue: [0, 1, 2, 3],
-    previousSongQueue: [],
-    currentSongId: 0,
-    isPlaying: false,
-    isShuffled: false,
-  },
-}
+describe('PlayerControl', () => {
+  let store
+  let audioRefMock
 
-describe('PlayerControls', () => {
-  const store = mockStore(initialState)
   beforeEach(() => {
+    store = mockStore({
+      songs: {
+        isShuffled: false,
+      },
+    })
+
+    audioRefMock = {
+      current: {
+        pause: jest.fn(),
+        play: jest.fn(),
+        currentTime: 0,
+      },
+    }
     render(
       <Provider store={store}>
-        <PlayerControl audioRef={audioMock} isPlaying={false} />
+        <PlayerControl audioRef={audioRefMock} />
       </Provider>
     )
   })
-  afterEach(() => {
-    jest.resetAllMocks()
-  })
-  test.only('renders player controls', () => {
-    const backButton = screen.getByAltText('back')
-    const playButton = screen.getByAltText('play')
-    const nextButton = screen.getByAltText('next')
 
-    expect(backButton).toBeInTheDocument()
-    expect(playButton).toBeInTheDocument()
-    expect(nextButton).toBeInTheDocument()
+  it('renders PlayerControl component', () => {
+    expect(screen.getByLabelText('player-controls')).toBeInTheDocument()
   })
 
-  test('should have audioMock.play called after clicking play', () => {
-    const playButton = screen.getByAltText('play')
-    fireEvent.click(playButton)
+  it('dispatches togglePlaying action when play/pause button is clicked', () => {
+    fireEvent.click(screen.getByAltText('play'))
 
-    expect(audioMock.current.play).toHaveBeenCalledTimes(1)
-    expect(audioMock.current.pause).not.toHaveBeenCalled()
+    expect(store.getActions()).toContainEqual(togglePlaying())
   })
-  test('should have audioMock.pause called after clicking pause, after it was played', () => {
-    const playingButton = screen.getByAltText('play')
 
-    fireEvent.click(playingButton)
+  it('dispatches selectPreviousSong action when back button is clicked', () => {
+    fireEvent.click(screen.getByAltText('back'))
 
-    expect(playingButton).toHaveAttribute('alt', 'pause')
-
-    fireEvent.click(playingButton)
-
-    expect(audioMock.current.play).toHaveBeenCalledTimes(1)
-    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
+    expect(store.getActions()).toContainEqual(selectPreviousSong())
   })
-  test('should have audioMock.current.pause called and dispatch selectNextSong after clicking next', () => {
-    const nextButton = screen.getByAltText('next')
-    fireEvent.click(nextButton)
 
-    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
-    expect(audioMock.current.play).not.toHaveBeenCalled()
+  it('dispatches selectNextSong action when next button is clicked', () => {
+    fireEvent.click(screen.getByAltText('next'))
+
+    expect(store.getActions()).toContainEqual(selectNextSong())
   })
-  test('should have audioMock.current.pause called and dispatch selectPreviousSong after clicking next', () => {
-    const nextButton = screen.getByAltText('back')
-    fireEvent.click(nextButton)
+  it('dispatches toggleShuffle action when shuffle button is clicked', () => {
+    fireEvent.click(screen.getByAltText('shuffle'))
 
-    expect(audioMock.current.pause).toHaveBeenCalledTimes(1)
-    expect(audioMock.current.play).not.toHaveBeenCalled()
+    expect(store.getActions()).toContainEqual(toggleShuffle())
   })
 })
