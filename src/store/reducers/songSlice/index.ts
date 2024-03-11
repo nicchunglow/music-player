@@ -1,6 +1,6 @@
 import { songIdList } from '../../../helper'
 import { createSlice } from '@reduxjs/toolkit'
-import { shuffleList } from '../../../helper/shuffle'
+import { isArrayDifferent, shuffleList } from '@/helper/shuffle'
 
 export type SongState = {
   songQueue: number[]
@@ -28,9 +28,12 @@ const songSlice = createSlice({
       const song = state.songQueue.shift()
       if (state.songQueue.length === 0) {
         if (state.isShuffled) {
-          let shuffledList
+          let shuffledList = shuffleList(songIdList)
 
-          while (!shuffledList || state.previousSongQueue === shuffledList) {
+          while (
+            !shuffledList ||
+            !isArrayDifferent(state.previousSongQueue, shuffledList)
+          ) {
             shuffledList = shuffleList(songIdList)
           }
 

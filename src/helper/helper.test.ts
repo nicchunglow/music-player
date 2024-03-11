@@ -1,5 +1,5 @@
-import { songIdList, formatTime } from './helper'
-import songs from './assets/music'
+import { songIdList, formatTime } from '.'
+import songs from '../assets/music'
 
 describe('Helper', () => {
   describe('songIdList ', () => {
