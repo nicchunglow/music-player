@@ -23,7 +23,7 @@ const SongQueueList: React.FC<SongQueueList> = ({ songs }) => {
 
   return (
     <div
-      className=' mx-4 flex h-[95vh] min-h-96
+      className=' mx-4 flex h-[95vh] min-h-[600px]
         w-11/12 flex-col items-center rounded-3xl 
         bg-white bg-opacity-25 md:w-9/12 lg:w-3/12 lg:max-w-[700px]'
     >
