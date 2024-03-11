@@ -27,7 +27,7 @@ const SongQueueList: React.FC<SongQueueList> = ({ songs }) => {
         flex-col items-center rounded-3xl bg-white 
         bg-opacity-25 md:w-9/12 lg:w-3/12 lg:max-w-[700px]'
     >
-      <h1 className='mt-12 font-bold'>Song Queue</h1>
+      <h1 className='mt-12 text-xl font-bold'>Song Queue</h1>
       <p
         className={`text-sky-400 transition-opacity duration-500 ease-in-out ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
       >
