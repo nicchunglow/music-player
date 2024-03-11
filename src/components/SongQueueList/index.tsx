@@ -29,7 +29,7 @@ const SongQueueList: React.FC<SongQueueList> = ({ songs }) => {
     >
       <h1 className='mt-12 font-bold'>Song Queue</h1>
       <p
-        className={`text-green-500 transition-opacity duration-500 ease-in-out ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
+        className={`text-sky-400 transition-opacity duration-500 ease-in-out ${isPlaying ? 'opacity-100' : 'opacity-0'}`}
       >
         now playing
       </p>
