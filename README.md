@@ -172,6 +172,8 @@ The codebase did not fully break into atomic design approach. Where possible or 
 
 ### Code Considerations
 
+-
+
 ## Setup
 
 ```
