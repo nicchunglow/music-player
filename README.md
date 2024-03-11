@@ -6,6 +6,11 @@
 
 - [Features](#Features)
 
+  - [What was done](#What-was-done)
+  - [What was used and coding considerations](#What-was-used-and-coding-considerations)
+
+- [Code Structure](#Code-Structure)
+
 - [Setup](#Setup)
 
 - [Available Scripts](#Available-Scripts)
@@ -37,12 +42,16 @@ Considerations:
 
 ## What was done
 
-Currently, the music player is able to:
+A music player with a queue list has been created as a result. The music player is able to:
 
 - play and pause song
+
 - go to next song or previous song if available
+
 - choose a song from the queue list
+
 - play shuffled or unshuffled song list
+
 - Have 'now playing' notification if it is playing
 
 For a comprehensive breakdown of features by use cases, please reference the [Features](#Features) list below.
@@ -54,10 +63,6 @@ the current app is mobile-responsive, with the recommended viewing dimensions at
 
 - Mobile view : 430 x 932 (Iphone 14 pro max reference)
 - Desktop view : 1440px x 921 (laptop L reference)
-
-### Codebase best practices
-
-This code base is also unit test backed, with 92.05% coverage. Most basic functionalities should have been covered.
 
 ## Features
 
@@ -99,6 +104,73 @@ This code base is also unit test backed, with 92.05% coverage. Most basic functi
 - choosing the song does not count it has listened, so that I can still have the list of songs to choose from.
 
 - if there are no more songs in the song Queue, the next song will be the first of a new list of songs, so that I can continuously listen to the songs.
+
+## What was used and coding considerations
+
+- This app is built on React with vite, with Redux used as state management, with tailwind for css.
+
+- This code base is also unit test backed, with **92.05%** coverage. Most basic functionalities should have been covered.
+
+- **husky** is implemented to have pre-commit test checks and lint if required.
+
+- code has prettier and eslint
+
+### Code Structure
+
+Below is the brief structure for reference
+
+```
+my-react-app/
+│
+├── public/
+│   └──favicon.ico
+│
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   └── music/
+│   │         └── artists/
+│   │
+│   ├── components/
+│   │   ├── ButtonWithImage/
+│   │   ├── Player/
+│   │   ├── PlayerControls/
+│   │   ├── ProgressBar/
+│   │   ├── SongQueueCard/
+│   │   └── SongQueueList/
+│   │             ├── index.tsx/
+│   │             └── SongQueueList.test.tsx
+│   ├── pages/
+│   │   └── App/
+│   │      ├── index.tsx
+│   │      └──  App.test.tsx
+│   │
+│   ├── helper/
+│   │      ├── index.tsx
+│   │      ├── helper.test.tsx
+│   │      └── **.ts
+│   │
+│   ├── store/
+│   │      ├── Reducers/
+│   │          ├── index.tsx (Root Reducer)
+│   │          ├── songSlice/
+│   │                 ├── **.ts
+│   ├── sharedTypes.ts
+```
+
+### Code Structure Considerations
+
+The codebase is split via **pages** and **components**, which most of the files be contained with a folder, using a index.ts/tsx as the main file.
+
+This is to allow the components to have multiple files in a single folder if required.
+
+The components are built with **atomic design** in mind, with mainly pages, templates, organisms put in heavier considerations.
+
+e.g. The App page has a Player, which have image and PlayerControls.
+
+The codebase did not fully break into atomic design approach. Where possible or if the components are big enough, they will be seperated.
+
+### Code Considerations
 
 ## Setup
 
