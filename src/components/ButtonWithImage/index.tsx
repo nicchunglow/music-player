@@ -13,7 +13,11 @@ const ButtonWithImage: React.FC<ButtonWithImageProps> = ({
 }) => {
   return (
     <button onClick={onClick} className='hover:opacity-80  active:opacity-60'>
-      {imgSrc && <img src={imgSrc} alt={altText} width={'30px'} />}
+      {imgSrc ? (
+        <img src={imgSrc} alt={altText} width={'30px'} />
+      ) : (
+        <p>{altText}</p>
+      )}
     </button>
   )
 }
