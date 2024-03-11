@@ -33,7 +33,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div className='progress flex w-full items-center justify-between'>
-      <span className='text-sm text-gray-500'>{formatTime(timeProgress)}</span>
+      <span aria-label='time-progress' className='text-sm text-gray-500'>
+        {formatTime(timeProgress)}
+      </span>
       <input
         type='range'
         ref={progressBarRef}
@@ -42,7 +44,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         onChange={handleProgressChange}
         className='h-1 w-full flex-grow cursor-pointer rounded'
       />
-      <span className='text-sm text-gray-500'>{formatTime(duration)}</span>
+      <span aria-label='duration' className='text-sm text-gray-500'>
+        {formatTime(duration)}
+      </span>
     </div>
   )
 }
