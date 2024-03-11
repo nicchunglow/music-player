@@ -1,14 +1,23 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Play, Pause, Next, Back } from '@/assets/images'
+import {
+  Play,
+  Pause,
+  Next,
+  Back,
+  SelectedShuffle,
+  Shuffle,
+} from '@/assets/images'
 import {
   selectNextSong,
   selectPreviousSong,
   togglePlaying,
+  toggleShuffle,
 } from '@/store/reducers/songSlice'
+import { RootState } from '@/store/reducers'
+
 import ButtonWithImage from '../ButtonWithImage'
-import ShuffleButton from '../ShuffleButton'
 
 type PlayerControlsProps = {
   audioRef?: {
@@ -30,7 +39,12 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({
   const onHandleMusic = () => {
     dispatch(togglePlaying())
   }
-
+  const shuffledState = useSelector(
+    (state: RootState) => state.songs.isShuffled
+  )
+  const onHandleShuffle = () => {
+    dispatch(toggleShuffle())
+  }
   const onHandleSongQueue = (action?: string | null) => {
     if (audioRef?.current) {
       if (action === 'back') {
@@ -71,7 +85,16 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({
             altText='next'
           />
         </span>
-        <ShuffleButton />
+        <div
+          aria-label='shuffle-button'
+          className={`${shuffledState ? 'bg-sky-400' : 'bg-white'} flex h-12 w-12 justify-center rounded-full`}
+        >
+          <ButtonWithImage
+            onClick={onHandleShuffle}
+            imgSrc={shuffledState ? SelectedShuffle : Shuffle}
+            altText='shuffle'
+          />
+        </div>
       </div>
     </>
   )
