@@ -52,10 +52,14 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
     if (audioElement) {
       audioElement.src = selectedSong?.audio
     }
+  }, [selectedSong])
 
-    if (audioElement && isPlaying) {
+  useEffect(() => {
+    const audioElement = audioRef.current
+    if (isPlaying) {
+      audioElement.currentTime = timeProgress
       audioElement.play()
-    } else if (audioElement) {
+    } else {
       audioElement.pause()
     }
 
@@ -64,7 +68,8 @@ const Player: React.FC<PlayerProps> = ({ selectedSong }) => {
     return () => {
       cancelAnimationFrame(playAnimationRef?.current || 0)
     }
-  }, [selectedSong, isPlaying, repeat])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying, repeat])
 
   return (
     <>
