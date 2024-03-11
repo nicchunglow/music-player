@@ -3,12 +3,16 @@ import Violet from './Connor Price - Violet.mp3'
 import Psychic from './Chris Brown - Psychic (Audio) ft. Jack Harlow.mp3'
 import JustDontLetGo from './Laberge - Just Dont Let Go ( Original Mix ).mp3'
 import Candy from './Jay Park - Candy.mp3'
+import SilverTooth from './SILVER TOOTH. (Clean).mp3'
+import ZuluSreams from './Zulu Screams.mp3'
 import {
   RieHata,
   JayPark,
   ConnorPrice,
   ChrisBrown,
   LaBerge,
+  Armani,
+  GoldLink,
 } from '@/assets/images/artists'
 
 const songs = [
@@ -49,38 +53,17 @@ const songs = [
   },
   {
     id: 5,
-    title: 'Catch A Vibe 2',
-    artist: 'Rie Hata',
-    audio: CatchAVibe,
-    img: RieHata,
+    title: 'Silver Tooth',
+    artist: 'Armani White & A$AP Ferg',
+    audio: SilverTooth,
+    img: Armani,
   },
   {
     id: 6,
-    title: 'Candy 2',
-    artist: 'Jay Park',
-    audio: Candy,
-    img: JayPark,
-  },
-  {
-    id: 7,
-    title: 'Violet 2',
-    artist: 'Connor Price',
-    audio: Violet,
-    img: ConnorPrice,
-  },
-  {
-    id: 8,
-    title: "Just Don't Let Go 2",
-    artist: 'Laberge',
-    audio: JustDontLetGo,
-    img: LaBerge,
-  },
-  {
-    id: 9,
-    title: 'Psychic 2',
-    artist: 'Chris Brown',
-    audio: Psychic,
-    img: ChrisBrown,
+    title: 'Zulu Screams',
+    artist: 'GoldLink',
+    audio: ZuluSreams,
+    img: GoldLink,
   },
 ]
 
