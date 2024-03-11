@@ -9,7 +9,7 @@
   - [What was done](#What-was-done)
   - [What was used and coding considerations](#What-was-used-and-coding-considerations)
 
-- [Code Structure](#Code-Structure)
+- [Code Structure and considerations](#Code-Structure-and-considerations)
 
 - [Setup](#Setup)
 
@@ -42,6 +42,8 @@ Considerations:
 
 ## What was done
 
+https://github.com/nicchunglow/music-player
+
 A music player with a queue list has been created as a result. The music player is able to:
 
 - play and pause song
@@ -50,7 +52,7 @@ A music player with a queue list has been created as a result. The music player 
 
 - choose a song from the queue list
 
-- play shuffled or unshuffled song list
+- play shuffled or unshuffled song list, with shuffle function enabled by default.
 
 - Have 'now playing' notification if it is playing
 
@@ -105,7 +107,7 @@ the current app is mobile-responsive, with the recommended viewing dimensions at
 
 - if there are no more songs in the song Queue, the next song will be the first of a new list of songs, so that I can continuously listen to the songs.
 
-## What was used and coding considerations
+## Code Structure and considerations
 
 - This app is built on React with vite, with Redux used as state management, with tailwind for css.
 
@@ -164,15 +166,45 @@ The codebase is split via **pages** and **components**, which most of the files 
 
 This is to allow the components to have multiple files in a single folder if required.
 
-The components are built with **atomic design** in mind, with mainly pages, templates, organisms put in heavier considerations.
+### State Management
 
-e.g. The App page has a Player, which have image and PlayerControls.
+#### Redux
 
-The codebase did not fully break into atomic design approach. Where possible or if the components are big enough, they will be seperated.
+```
+{ songs : {
+  songQueue: number[]
+  previousSongQueue: number[]
+  currentSongId: number
+  isPlaying: boolean
+  isShuffled: boolean
+}}
+```
 
 ### Code Considerations
 
--
+#### General
+
+- The components are built with **atomic design** in mind, with mainly pages, templates, organisms put in heavier considerations.
+
+  e.g. The App page has a Player, which have image and PlayerControls.
+
+  The codebase did not fully break into atomic design approach. Where possible or if the components are big enough, they will be seperated.
+
+- Tailwind was used due to its utility-first approach, allowing us to develop in the component.
+
+#### Flow
+
+- For our repeat music player, when we introduce a new list, the previousQueue will be used for comparison to ensure it is not the same list. After which, the previousQueue will be removed. This consideration is also based by a user starting fresh with a new queue of songs.
+
+- Based on user behaviour, back button repeat same song is introduced. Hence, when you click the back button that has the song played more than 3 seconds, it will do a repeat. When it is under 3 seconds, it will go to the previous song. This behaviour is similar to existing music players availale.
+
+#### Queue Logic
+
+- The queue itself starts from a list of unsorted songs.
+- This queue will be shuffled by our function (shuffleList).
+- When you uncheck the isShuffled function at music at a given index, the song will go back to the original list, referencing its index.
+  e.g [9,8,1], uncheck isShuffled at 8, the remaining will become [8,9], assuming the the original list ends at 9.
+  This is behaviour referenced from spotify.
 
 ## Setup
 
