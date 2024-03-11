@@ -7,10 +7,10 @@
 - [Features](#Features)
 
   - [What was done](#What-was-done)
-  - [What was used and coding considerations](#What-was-used-and-coding-considerations)
 
 - [Code Structure and considerations](#Code-Structure-and-considerations)
-
+  - [Code Structure](#Code-structure)
+  - [Code Considerations](#Code-Considerations)
 - [Setup](#Setup)
 
 - [Available Scripts](#Available-Scripts)
@@ -60,7 +60,7 @@ For a comprehensive breakdown of features by use cases, please reference the [Fe
 
 ### Mobile-Responsive
 
-As the product thought was to have a mobile-first application,
+As the product's thought was to have a mobile-first application,
 the current app is mobile-responsive, with the recommended viewing dimensions at :
 
 - Mobile view : 430 x 932 (Iphone 14 pro max reference)
@@ -184,11 +184,15 @@ This is to allow the components to have multiple files in a single folder if req
 
 #### General
 
+- React with Vite is the next best recommendation, by the react documentations.
+
+https://react.dev/learn/start-a-new-react-project#can-i-use-react-without-a-framework
+
 - The components are built with **atomic design** in mind, with mainly pages, templates, organisms put in heavier considerations.
 
   e.g. The App page has a Player, which have image and PlayerControls.
 
-  The codebase did not fully break into atomic design approach. Where possible or if the components are big enough, they will be seperated.
+  The codebase borrows atomic design approach, by applying abstractions of components when necessary.
 
 - Tailwind was used due to its utility-first approach, allowing us to develop in the component.
 
