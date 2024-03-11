@@ -25,15 +25,39 @@ Goal:
 Ensure songs will keep playing in shuffled loops. The songs will keep playing without
 ever stopping – like a Repeat func,on being enabled.
 
-E.g., aNer the last song, program will loop the songs again, but loop should be of a
+E.g. After the last song, program will loop the songs again, but loop should be of a
 different shuffle order – meaning the 1st round and the 2nd round should not be the
 same.
 
-Considertions:
+Considerations:
 
 - product thinking
 - all rounded considerations
 - design concepts.
+
+## What was done
+
+Currently, the music player is able to:
+
+- play and pause song
+- go to next song or previous song if available
+- choose a song from the queue list
+- play shuffled or unshuffled song list
+- Have 'now playing' notification if it is playing
+
+For a comprehensive breakdown of features by use cases, please reference the [Features](#Features) list below.
+
+### Mobile-Responsive
+
+As the product thought was to have a mobile-first application,
+the current app is mobile-responsive, with the recommended viewing dimensions at :
+
+- Mobile view : 430 x 932 (Iphone 14 pro max reference)
+- Desktop view : 1440px x 921 (laptop L reference)
+
+### Codebase best practices
+
+This code base is also unit test backed, with 92.05% coverage. Most basic functionalities should have been covered.
 
 ## Features
 
