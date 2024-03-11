@@ -2,7 +2,7 @@ import songs from './assets/music'
 
 export const songIdList = songs.map((song) => song.id)
 
-export const shuffleQueue = (array: number[]) => {
+export const shuffleList = (array: number[]) => {
   const newArray = [...array]
 
   let currentIndex = newArray.length
