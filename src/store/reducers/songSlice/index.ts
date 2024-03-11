@@ -1,5 +1,6 @@
-import { shuffleList, songIdList } from '../../helper'
+import { songIdList } from '../../../helper'
 import { createSlice } from '@reduxjs/toolkit'
+import { shuffleList } from './songSlice.helper'
 
 export type SongState = {
   songQueue: number[]

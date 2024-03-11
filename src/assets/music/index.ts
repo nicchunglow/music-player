@@ -47,41 +47,6 @@ const songs = [
     audio: Psychic,
     img: ChrisBrown,
   },
-  {
-    id: 5,
-    title: 'Catch A Vibe 2',
-    artist: 'Rie Hata',
-    audio: CatchAVibe,
-    img: '',
-  },
-  {
-    id: 6,
-    title: 'Candy 2',
-    artist: 'Jay Park',
-    audio: Candy,
-    img: JayPark,
-  },
-  {
-    id: 7,
-    title: 'Violet 2',
-    artist: 'Connor Price',
-    audio: Violet,
-    img: ConnorPrice,
-  },
-  {
-    id: 8,
-    title: "Just Don't Let Go 2",
-    artist: 'Laberge',
-    audio: JustDontLetGo,
-    img: LaBerge,
-  },
-  {
-    id: 9,
-    title: 'Psychic 2',
-    artist: 'Chris Brown',
-    audio: Psychic,
-    img: ChrisBrown,
-  },
 ]
 
 export default songs

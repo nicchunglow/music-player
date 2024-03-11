@@ -1,4 +1,4 @@
-import { songIdList, shuffleList } from './helper'
+import { songIdList } from './helper'
 import songs from './assets/music'
 
 describe('Helper', () => {
@@ -9,13 +9,6 @@ describe('Helper', () => {
       const result = songIdList
 
       expect(result).toEqual(expectedIds)
-    })
-  })
-  describe('shuffleList', () => {
-    it('should shuffle a list', () => {
-      const list = [1, 2, 3, 4]
-      const expected = shuffleList(list)
-      expect(expected).not.toEqual(list)
     })
   })
 })
