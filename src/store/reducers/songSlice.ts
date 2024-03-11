@@ -1,4 +1,4 @@
-import { songIdList } from '@/helper'
+import { shuffleQueue, songIdList } from '../../helper'
 import { createSlice } from '@reduxjs/toolkit'
 
 export type SongState = {
@@ -15,22 +15,6 @@ const initialState: SongState = {
   currentSongId: songIdList[0],
   isPlaying: false,
   isShuffled: true,
-}
-const shuffleQueue = (array: number[]) => {
-  const newArray = [...array]
-
-  let currentIndex = newArray.length
-
-  while (currentIndex > 0) {
-    const randomIndex = Math.floor(Math.random() * currentIndex)
-    currentIndex--
-    ;[newArray[currentIndex], newArray[randomIndex]] = [
-      newArray[randomIndex],
-      newArray[currentIndex],
-    ]
-  }
-
-  return newArray
 }
 
 const songSlice = createSlice({
