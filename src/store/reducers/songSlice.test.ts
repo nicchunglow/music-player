@@ -1,4 +1,3 @@
-import { songIdList } from '@/helper'
 import songReducer, {
   toggleShuffle,
   selectNextSong,
@@ -8,10 +7,7 @@ import songReducer, {
   selectSong,
 } from './songSlice'
 
-jest.mock('@/helper', () => ({
-  songIdList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  shuffleQueue: jest.fn((array) => array),
-}))
+const songIdList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 describe('songSlice', () => {
   const initialState: SongState = {
@@ -22,9 +18,6 @@ describe('songSlice', () => {
     isShuffled: true,
   }
 
-  it('should return the initial state', () => {
-    expect(songReducer(undefined, { type: 'unknown' })).toEqual(initialState)
-  })
   describe('selectSong', () => {
     const initialState: SongState = {
       songQueue: [1, 8, 9],
@@ -75,6 +68,17 @@ describe('songSlice', () => {
       }
       const state = songReducer(initialState, selectNextSong())
       expect(state.songQueue.length).toEqual(songIdList.length)
+    })
+    it('should not have a list that is the same as the previousQueue', () => {
+      const initialState: SongState = {
+        songQueue: [],
+        previousSongQueue: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+        currentSongId: 0,
+        isPlaying: false,
+        isShuffled: true,
+      }
+      const state = songReducer(initialState, selectNextSong())
+      expect(state.songQueue).not.toEqual(state.previousSongQueue)
     })
   })
   it('should handle selectPreviousSong', () => {

@@ -10,6 +10,7 @@ export type SongState = {
 }
 
 const shuffledList = shuffleQueue(songIdList)
+
 const initialState: SongState = {
   songQueue: shuffledList,
   previousSongQueue: [],
@@ -26,7 +27,12 @@ const songSlice = createSlice({
       const song = state.songQueue.shift()
       if (state.songQueue.length === 0) {
         if (state.isShuffled) {
-          const shuffledList = shuffleQueue(songIdList)
+          let shuffledList
+
+          while (!shuffledList || state.previousSongQueue === shuffledList) {
+            shuffledList = shuffleQueue(songIdList)
+          }
+
           state.songQueue = shuffledList
         } else {
           state.songQueue = songIdList
