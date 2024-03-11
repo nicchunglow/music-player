@@ -8,6 +8,7 @@ import {
   togglePlaying,
 } from '@/store/reducers/songSlice'
 import ButtonWithImage from '../ButtonWithImage'
+import ShuffleButton from '../ShuffleButton'
 
 type PlayerControlsProps = {
   audioRef?: {
@@ -50,24 +51,27 @@ const PlayerControl: React.FC<PlayerControlsProps> = ({
   return (
     <>
       <div
-        className='mt-4 flex w-full justify-evenly'
+        className='mt-4 flex w-full flex-col items-center justify-center'
         aria-label='player-controls'
       >
-        <ButtonWithImage
-          onClick={() => onHandleSongQueue('back')}
-          imgSrc={Back}
-          altText='back'
-        />
-        <ButtonWithImage
-          onClick={onHandleMusic}
-          imgSrc={playPauseConditionImage}
-          altText={playPauseConditionText}
-        />
-        <ButtonWithImage
-          onClick={onHandleSongQueue}
-          imgSrc={Next}
-          altText='next'
-        />
+        <span className='my-4 flex w-full justify-around'>
+          <ButtonWithImage
+            onClick={() => onHandleSongQueue('back')}
+            imgSrc={Back}
+            altText='back'
+          />
+          <ButtonWithImage
+            onClick={onHandleMusic}
+            imgSrc={playPauseConditionImage}
+            altText={playPauseConditionText}
+          />
+          <ButtonWithImage
+            onClick={onHandleSongQueue}
+            imgSrc={Next}
+            altText='next'
+          />
+        </span>
+        <ShuffleButton />
       </div>
     </>
   )
